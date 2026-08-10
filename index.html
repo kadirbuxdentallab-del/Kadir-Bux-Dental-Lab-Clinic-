@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kadir Bux Dental Lab & Clinic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState } = React;
+
+      // Patient Form Component
+      function PatientForm() {
+        const [patient, setPatient] = useState({ name: '', age: '', phone: '', treatment: '', toothNumber: '', totalAmount: '', paidAmount: '' });
+        const handleSubmit = (e) => { e.preventDefault(); alert(`Patient ${patient.name} registered!`); };
+
+        return (
+          <div className="max-w-xl mx-auto bg-white p-6 rounded-lg shadow my-6 border">
+            <h2 className="text-xl font-bold text-blue-900 mb-4 border-b pb-2">New Patient Registration</h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold">Patient Name</label>
+                <input type="text" required className="w-full p-2 border rounded mt-1" value={patient.name} onChange={(e) => setPatient({ ...patient, name: e.target.value })} placeholder="e.g. Rahul Sharma" />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold">Age</label>
+                  <input type="number" className="w-full p-2 border rounded mt-1" value={patient.age} onChange={(e) => setPatient({ ...patient, age: e.target.value })} placeholder="35" />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold">Phone</label>
+                  <input type="tel" className="w-full p-2 border rounded mt-1" value={patient.phone} onChange={(e) => setPatient({ ...patient, phone: e.target.value })} placeholder="9876543210" />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold">Treatment</label>
+                  <input type="text" className="w-full p-2 border rounded mt-1" value={patient.treatment} onChange={(e) => setPatient({ ...patient, treatment: e.target.value })} placeholder="Zirconia Crown" />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold">Tooth No. / Shade</label>
+                  <input type="text" className="w-full p-2 border rounded mt-1" value={patient.toothNumber} onChange={(e) => setPatient({ ...patient, toothNumber: e.target.value })} placeholder="#11 (A2)" />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold">Total Fees (₹)</label>
+                  <input type="number" className="w-full p-2 border rounded mt-1" value={patient.totalAmount} onChange={(e) => setPatient({ ...patient, totalAmount: e.target.value })} placeholder="5000" />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold">Advance Paid (₹)</label>
+                  <input type="number" className="w-full p-2 border rounded mt-1" value={patient.paidAmount} onChange={(e) => setPatient({ ...patient, paidAmount: e.target.value })} placeholder="2000" />
+                </div>
+              </div>
+              <button type="submit" className="w-full bg-blue-700 text-white font-bold py-2 rounded mt-4">Save Patient Entry</button>
+            </form>
+          </div>
+        );
+      }
+
+      // Lab Order Component
+      function LabOrderForm() {
+        const [order, setOrder] = useState({ patientName: '', doctorName: '', workType: 'Zirconia Crown', toothNumber: '', shade: '', deliveryDate: '' });
+        const handleSubmit = (e) => { e.preventDefault(); alert(`Lab order for ${order.patientName} saved!`); };
+
+        return (
+          <div className="max-w-xl mx-auto bg-white p-6 rounded-lg shadow my-6 border">
+            <h2 className="text-xl font-bold text-teal-900 mb-4 border-b pb-2">New Dental Lab Order</h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold">Patient Name</label>
+                <input type="text" required className="w-full p-2 border rounded mt-1" value={order.patientName} onChange={(e) => setOrder({ ...order, patientName: e.target.value })} placeholder="e.g. Rahul Sharma" />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold">Doctor / Clinic</label>
+                  <input type="text" className="w-full p-2 border rounded mt-1" value={order.doctorName} onChange={(e) => setOrder({ ...order, doctorName: e.target.value })} placeholder="Dr. Kasim" />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold">Work Type</label>
+                  <select className="w-full p-2 border rounded mt-1 bg-white" value={order.workType} onChange={(e) => setOrder({ ...order, workType: e.target.value })}>
+                    <option value="Zirconia Crown">Zirconia Crown</option>
+                    <option value="PFM Crown">PFM Crown</option>
+                    <option value="Denture">Denture</option>
+                  </select>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold">Tooth Number(s)</label>
+                  <input type="text" className="w-full p-2 border rounded mt-1" value={order.toothNumber} onChange={(e) => setOrder({ ...order, toothNumber: e.target.value })} placeholder="#11, #12" />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold">Shade</label>
+                  <input type="text" className="w-full p-2 border rounded mt-1" value={order.shade} onChange={(e) => setOrder({ ...order, shade: e.target.value })} placeholder="A2 / A3" />
+                </div>
+              </div>
+              <button type="submit" className="w-full bg-teal-700 text-white font-bold py-2 rounded mt-4">Save Lab Order</button>
+            </form>
+          </div>
+        );
+      }
+
+      // Invoice Component
+      function InvoiceForm() {
+        const [invoice, setInvoice] = useState({ patientName: '', service: '', totalAmount: '', discount: '0', paidAmount: '' });
+        const grandTotal = Number(invoice.totalAmount) - Number(invoice.discount);
+        const dueAmount = grandTotal - Number(invoice.paidAmount);
+        const handleSubmit = (e) => { e.preventDefault(); alert(`Invoice created! Due: ₹${dueAmount}`); };
+
+        return (
+          <div className="max-w-xl mx-auto bg-white p-6 rounded-lg shadow my-6 border">
+            <h2 className="text-xl font-bold text-slate-800 mb-4 border-b pb-2">Create Patient Billing Invoice</h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold">Patient Name</label>
+                <input type="text" required className="w-full p-2 border rounded mt-1" value={invoice.patientName} onChange={(e) => setInvoice({ ...invoice, patientName: e.target.value })} placeholder="e.g. Rahul Sharma" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold">Treatment Details</label>
+                <input type="text" className="w-full p-2 border rounded mt-1" value={invoice.service} onChange={(e) => setInvoice({ ...invoice, service: e.target.value })} placeholder="Root Canal + Zirconia Crown" />
+              </div>
+              <div className="grid grid-cols-3 gap-2">
+                <div>
+                  <label className="block text-xs font-semibold">Total (₹)</label>
+                  <input type="number" className="w-full p-2 border rounded mt-1" value={invoice.totalAmount} onChange={(e) => setInvoice({ ...invoice, totalAmount: e.target.value })} placeholder="5000" />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold">Discount (₹)</label>
+                  <input type="number" className="w-full p-2 border rounded mt-1" value={invoice.discount} onChange={(e) => setInvoice({ ...invoice, discount: e.target.value })} placeholder="0" />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold">Paid (₹)</label>
+                  <input type="number" className="w-full p-2 border rounded mt-1" value={invoice.paidAmount} onChange={(e) => setInvoice({ ...invoice, paidAmount: e.target.value })} placeholder="3000" />
+                </div>
+              </div>
+              <div className="bg-slate-50 p-3 rounded text-sm border space-y-1">
+                <div className="flex justify-between"><span>Grand Total:</span><span className="font-bold">₹{grandTotal > 0 ? grandTotal : 0}</span></div>
+                <div className="flex justify-between text-red-600"><span>Due Balance:</span><span className="font-bold">₹{dueAmount > 0 ? dueAmount : 0}</span></div>
+              </div>
+              <button type="submit" className="w-full bg-slate-800 text-white font-bold py-2 rounded mt-4">Generate & Print Invoice</button>
+            </form>
+          </div>
+        );
+      }
+
+      // Main App
+      function App() {
+        const [activeTab, setActiveTab] = useState('dashboard');
+
+        return (
+          <div className="font-sans bg-slate-100 min-h-screen p-4">
+            <header className="bg-blue-900 text-white p-4 rounded-lg flex justify-between items-center shadow">
+              <div>
+                <h2 className="text-lg font-bold">Kadir Bux Dental Lab & Clinic</h2>
+                <p className="text-xs text-blue-200">Practice & Lab Management System</p>
+              </div>
+              <span className="bg-green-500 text-white px-2 py-1 rounded-full text-xs">Active</span>
+            </header>
+
+            <div className="flex gap-2 my-4 flex-wrap">
+              <button onClick={() => setActiveTab('dashboard')} className={`px-4 py-2 rounded text-sm font-semibold ${activeTab === 'dashboard' ? 'bg-blue-900 text-white' : 'bg-white border'}`}>Dashboard View</button>
+              <button onClick={() => setActiveTab('new-patient')} className={`px-4 py-2 rounded text-sm font-semibold ${activeTab === 'new-patient' ? 'bg-blue-900 text-white' : 'bg-white border'}`}>+ New Patient</button>
+              <button onClick={() => setActiveTab('lab-order')} className={`px-4 py-2 rounded text-sm font-semibold ${activeTab === 'lab-order' ? 'bg-teal-800 text-white' : 'bg-white border'}`}>+ Add Lab Order</button>
+              <button onClick={() => setActiveTab('invoice')} className={`px-4 py-2 rounded text-sm font-semibold ${activeTab === 'invoice' ? 'bg-slate-800 text-white' : 'bg-white border'}`}>Create Invoice</button>
+            </div>
+
+            {activeTab === 'dashboard' && (
+              <>
+                <div className="grid grid-cols-3 gap-3 mt-4">
+                  <div className="bg-white p-4 rounded shadow border">
+                    <p className="text-xs text-gray-500">Total Patients</p>
+                    <h3 className="text-xl font-bold text-blue-900">0</h3>
+                  </div>
+                  <div className="bg-white p-4 rounded shadow border">
+                    <p className="text-xs text-gray-500">Today Lab Jobs</p>
+                    <h3 className="text-xl font-bold text-blue-900">0</h3>
+                  </div>
+                  <div className="bg-white p-4 rounded shadow border">
+                    <p className="text-xs text-gray-500">Pending Payments</p>
+                    <h3 className="text-xl font-bold text-red-600">₹0</h3>
+                  </div>
+                </div>
+
+                <div className="bg-white mt-4 p-4 rounded shadow border">
+                  <h3 className="text-sm font-bold mb-3">Quick Actions</h3>
+                  <div className="flex gap-2 flex-wrap">
+                    <button onClick={() => setActiveTab('new-patient')} className="bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium">+ New Patient</button>
+                    <button onClick={() => setActiveTab('lab-order')} className="bg-teal-700 text-white px-4 py-2 rounded text-sm font-medium">+ Add Lab Order</button>
+                    <button onClick={() => setActiveTab('invoice')} className="bg-slate-700 text-white px-4 py-2 rounded text-sm font-medium">Create Invoice</button>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {activeTab === 'new-patient' && <PatientForm />}
+            {activeTab === 'lab-order' && <LabOrderForm />}
+            {activeTab === 'invoice' && <InvoiceForm />}
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+  </body>
+</html>
