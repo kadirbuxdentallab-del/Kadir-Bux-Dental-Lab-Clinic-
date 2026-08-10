@@ -3,1120 +3,3331 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Kadir Baksh Dental Lab</title>
+<meta name="theme-color" content="#0A89FF">
+<title>Kadir Bux Dental Lab</title>
 
 <style>
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial, sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    background:#f7f5ff;
-    color:#29243a;
+    background:#eaf5ff;
+    color:#073b72;
 }
 
-header{
-    height:70px;
-    background:linear-gradient(90deg,#fff,#f5eaff);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 25px;
-    border-bottom:1px solid #eee;
+button,input,select,textarea{
+    font:inherit;
 }
 
-.logo{
+button{
+    cursor:pointer;
+}
+
+.app{
+    width:100%;
+    max-width:560px;
+    min-height:100vh;
+    margin:auto;
+    background:#f8fcff;
+    box-shadow:0 0 30px rgba(0,80,160,.15);
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    background:linear-gradient(135deg,#087fff,#0057b9);
+    color:white;
+    padding:22px 18px 26px;
+    border-radius:0 0 30px 30px;
+}
+
+.brand{
     display:flex;
     align-items:center;
     gap:12px;
 }
 
-.logo-icon{
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    background:linear-gradient(135deg,#ff13b8,#713cff);
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-weight:bold;
-}
-
-.logo h3{
-    font-size:15px;
-}
-
-.logo small{
-    color:#777;
-}
-
-nav{
-    display:flex;
-    gap:20px;
-    align-items:center;
-}
-
-nav button{
-    border:0;
-    background:transparent;
-    cursor:pointer;
-    color:#4e475d;
-    padding:8px 12px;
-}
-
-nav button:hover{
-    color:#a000ff;
-}
-
-.container{
-    max-width:1250px;
-    margin:auto;
-    padding:25px;
-}
-
-.page-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.page-title h2{
-    font-size:22px;
-}
-
-.page-title span{
-    color:#a000ff;
-}
-
-.primary{
-    background:linear-gradient(90deg,#f500b8,#8a16f5);
-    color:white;
-    border:none;
-    border-radius:9px;
-    padding:12px 20px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.search-box{
+.logo{
+    width:60px;
+    height:60px;
     background:white;
-    padding:15px;
-    border-radius:14px;
-    box-shadow:0 5px 20px #ddd8ee;
-    margin-bottom:20px;
-}
-
-.search-box input{
-    width:100%;
-    border:1px solid #ddd;
-    padding:13px;
-    border-radius:8px;
-    outline:none;
-}
-
-.patient-list{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:18px;
-}
-
-.patient-card{
-    background:white;
-    border-radius:15px;
-    padding:18px;
-    box-shadow:0 5px 20px #ddd8ee;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.patient-card:hover{
-    transform:translateY(-3px);
-    box-shadow:0 8px 25px #d5ccef;
-}
-
-.patient-top{
-    display:flex;
-    gap:13px;
-    align-items:center;
-}
-
-.avatar{
-    width:55px;
-    height:55px;
-    border-radius:50%;
-    background:linear-gradient(135deg,#e85cff,#7d28ff);
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:20px;
-    font-weight:bold;
-}
-
-.patient-info h3{
-    font-size:16px;
-    margin-bottom:5px;
-}
-
-.patient-info p{
-    color:#777;
-    font-size:13px;
-}
-
-.details{
-    margin-top:15px;
-    border-top:1px solid #eee;
-    padding-top:12px;
-}
-
-.details p{
-    margin:7px 0;
-    font-size:13px;
-}
-
-.actions{
-    display:flex;
-    gap:7px;
-    margin-top:15px;
-}
-
-.actions button{
-    flex:1;
-    padding:8px;
-    border-radius:7px;
-    border:1px solid #ddd;
-    background:white;
-    cursor:pointer;
-}
-
-.profile{
-    display:none;
-}
-
-.profile-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.back{
-    background:white;
-    border:1px solid #ddd;
-    padding:10px 16px;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-.profile-box{
-    background:white;
+    color:#087fff;
     border-radius:18px;
-    padding:25px;
-    box-shadow:0 5px 25px #ded8ef;
-}
-
-.profile-top{
     display:grid;
-    grid-template-columns:1fr 260px;
-    gap:25px;
+    place-items:center;
+    font-size:34px;
 }
 
-.patient-data{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-}
-
-.data-row{
-    padding:12px;
-    border-bottom:1px solid #eee;
-    font-size:13px;
-}
-
-.data-row span{
-    color:#888;
-    display:block;
-    margin-bottom:5px;
-}
-
-.big-avatar{
-    height:230px;
-    border-radius:20px;
-    background:#faf5ff;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:100px;
-    color:#b14aff;
-}
-
-.contact-buttons{
-    display:flex;
-    gap:8px;
-    margin-top:15px;
-}
-
-.contact-buttons button{
-    flex:1;
-    padding:10px;
-    border:0;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-.call{
-    background:#e8fff5;
-    color:#008a57;
-}
-
-.sms{
-    background:#eef7ff;
-    color:#1976d2;
-}
-
-.whatsapp{
-    background:#e9fff0;
-    color:#159447;
-}
-
-.money-box{
-    margin-top:20px;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    border-radius:15px;
-    overflow:hidden;
-    background:linear-gradient(90deg,#5423bc,#b61bdb,#087dcc);
-    color:white;
-}
-
-.money{
-    padding:18px;
-    border-right:1px solid #ffffff55;
-}
-
-.money small{
-    display:block;
-    opacity:.8;
-    margin-bottom:7px;
-}
-
-.money strong{
+.brand h1{
     font-size:20px;
 }
 
-.section{
-    margin-top:25px;
+.brand p{
+    font-size:11px;
+    margin-top:4px;
+    opacity:.9;
 }
 
-.section h3{
-    margin-bottom:12px;
+.tagline{
+    font-size:26px;
+    line-height:1.1;
+    font-weight:800;
+    margin-top:20px;
 }
 
-.dental-chart{
-    background:white;
-    border-radius:15px;
-    padding:20px;
-    overflow:auto;
+.tagline span{
+    color:#dff3ff;
 }
 
-.teeth{
-    display:flex;
-    justify-content:center;
-    gap:8px;
-    min-width:700px;
-}
-
-.tooth{
-    width:32px;
-    height:42px;
-    background:#fff;
-    border:1px solid #ddd;
-    border-radius:5px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:10px;
-    cursor:pointer;
-}
-
-.tooth.selected{
-    border:2px solid #a300ff;
-    box-shadow:0 0 8px #c770ff;
-}
-
-.jaw-title{
-    text-align:center;
-    margin:15px;
-    color:#777;
-}
-
-.treatment{
-    background:white;
-    border-radius:15px;
-    padding:18px;
-    box-shadow:0 4px 18px #e1dcef;
-}
-
-.treatment-head{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:15px;
-}
-
-.status{
-    background:#ffc928;
-    color:white;
-    padding:5px 12px;
-    border-radius:20px;
+.headerText{
+    margin-top:9px;
     font-size:12px;
 }
 
-.treatment p{
-    margin:8px 0;
-    font-size:13px;
-}
+/* ================= HERO PHOTO ================= */
 
-.form-box{
-    display:none;
+.hero{
+    position:relative;
+    margin:15px;
+    border-radius:24px;
+    overflow:hidden;
     background:white;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 5px 25px #ddd8ee;
-    margin-bottom:20px;
+    box-shadow:0 8px 25px rgba(0,80,160,.12);
 }
 
-.form-grid{
+.hero img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+    display:block;
+}
+
+.heroText{
+    position:absolute;
+    left:12px;
+    right:12px;
+    bottom:12px;
+    background:rgba(255,255,255,.92);
+    border-radius:15px;
+    padding:11px 13px;
+}
+
+.heroText b{
+    display:block;
+    color:#064c92;
+    font-size:19px;
+}
+
+.heroText span{
+    color:#52728d;
+    font-size:11px;
+}
+
+/* ================= CONTENT ================= */
+
+.content{
+    padding:16px;
+}
+
+.title{
+    font-size:19px;
+    font-weight:800;
+    margin:17px 0 11px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:9px;
+}
+
+.stat{
+    background:white;
+    border:1px solid #dcefff;
+    border-radius:17px;
+    padding:13px 5px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,80,160,.08);
+}
+
+.statIcon{
+    font-size:22px;
+}
+
+.stat b{
+    display:block;
+    color:#087fff;
+    font-size:21px;
+    margin:3px;
+}
+
+.stat small{
+    color:#7890a6;
+    font-size:10px;
+}
+
+.menuGrid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:15px;
+    gap:11px;
 }
 
-.form-group label{
+.menuCard{
+    border:1px solid #dcefff;
+    background:white;
+    border-radius:19px;
+    padding:17px 12px;
+    text-align:left;
+    box-shadow:0 5px 15px rgba(0,80,160,.08);
+}
+
+.menuCard:active{
+    transform:scale(.98);
+}
+
+.menuIcon{
+    font-size:27px;
+    margin-bottom:8px;
+}
+
+.menuCard b{
     display:block;
-    font-size:13px;
+    color:#064a87;
+    font-size:14px;
+}
+
+.menuCard small{
+    color:#7890a6;
+    font-size:10px;
+}
+
+.specialities{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:9px;
+}
+
+.speciality{
+    background:white;
+    border-radius:16px;
+    padding:13px 5px;
+    text-align:center;
+    box-shadow:0 4px 12px rgba(0,80,160,.07);
+}
+
+.speciality div{
+    font-size:27px;
+}
+
+.speciality b{
+    display:block;
+    font-size:10px;
+    margin-top:5px;
+}
+
+.speciality small{
+    font-size:8px;
+    color:#7890a6;
+}
+
+/* ================= BUTTONS ================= */
+
+.primary{
+    width:100%;
+    border:0;
+    border-radius:15px;
+    padding:14px;
+    background:linear-gradient(135deg,#087fff,#0057b9);
+    color:white;
+    font-weight:800;
+    box-shadow:0 7px 18px rgba(0,100,210,.22);
+}
+
+.secondary{
+    border:0;
+    border-radius:11px;
+    padding:10px 13px;
+    background:#e8f5ff;
+    color:#0565c5;
+    font-weight:700;
+}
+
+.danger{
+    border:0;
+    border-radius:11px;
+    padding:10px 13px;
+    background:#ffecec;
+    color:#d92727;
+    font-weight:700;
+}
+
+/* ================= SCREENS ================= */
+
+.screen{
+    display:none;
+    min-height:100vh;
+    padding-bottom:75px;
+}
+
+.screen.active{
+    display:block;
+}
+
+.pageHeader{
+    background:linear-gradient(135deg,#087fff,#0057b9);
+    color:white;
+    padding:15px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.back{
+    width:40px;
+    height:40px;
+    border:0;
+    border-radius:12px;
+    background:rgba(255,255,255,.18);
+    color:white;
+    font-size:25px;
+}
+
+.pageHeader h2{
+    font-size:19px;
+}
+
+.pageHeader small{
+    opacity:.85;
+}
+
+/* ================= FORM ================= */
+
+.form{
+    margin:16px;
+    background:white;
+    border-radius:20px;
+    padding:17px;
+    box-shadow:0 5px 18px rgba(0,80,160,.08);
+}
+
+.formGroup{
+    margin-bottom:13px;
+}
+
+.formGroup label{
+    display:block;
+    font-size:11px;
+    font-weight:800;
+    color:#42637d;
     margin-bottom:6px;
 }
 
-.form-group input,
-.form-group select{
+.formGroup input,
+.formGroup select,
+.formGroup textarea,
+.search input{
     width:100%;
-    padding:11px;
-    border:1px solid #ddd;
-    border-radius:8px;
+    border:1px solid #d5e8f7;
+    background:#f8fcff;
+    border-radius:11px;
+    padding:12px;
+    outline:none;
+    color:#173f63;
 }
 
-.form-buttons{
-    margin-top:20px;
-    display:flex;
-    gap:10px;
+.formGroup textarea{
+    min-height:85px;
+    resize:vertical;
 }
 
-.form-buttons button{
-    padding:11px 20px;
-    border-radius:8px;
-    border:0;
-    cursor:pointer;
+.formRow{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
 }
 
-.save{
-    background:#9d00ff;
+/* ================= PHOTO UPLOAD ================= */
+
+.photoBox{
+    border:2px dashed #abd9fa;
+    border-radius:16px;
+    background:#f5fbff;
+    padding:13px;
+    text-align:center;
+    margin-bottom:15px;
+}
+
+.photoPreview{
+    width:105px;
+    height:105px;
+    object-fit:cover;
+    border-radius:50%;
+    display:none;
+    margin:0 auto 9px;
+    border:4px solid #d9efff;
+}
+
+.photoButton{
+    display:inline-block;
+    background:#087fff;
     color:white;
+    border-radius:11px;
+    padding:10px 13px;
+    font-weight:700;
+    font-size:12px;
 }
 
-.cancel{
-    background:#eee;
+/* ================= SEARCH ================= */
+
+.search{
+    padding:15px;
 }
 
-@media(max-width:700px){
+/* ================= PATIENT ================= */
 
-    header{
-        padding:0 12px;
-        height:60px;
-    }
+.patientCard{
+    margin:9px 15px;
+    background:white;
+    border-radius:18px;
+    padding:14px;
+    box-shadow:0 4px 14px rgba(0,80,160,.08);
+}
 
-    nav button{
-        padding:5px;
-        font-size:11px;
-    }
+.patient{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
 
-    .container{
-        padding:15px;
-    }
+.patientPhoto{
+    width:57px;
+    height:57px;
+    border-radius:50%;
+    object-fit:cover;
+    background:#e8f5ff;
+    display:grid;
+    place-items:center;
+    font-size:25px;
+    flex:none;
+}
 
-    .profile-top{
-        grid-template-columns:1fr;
-    }
+.patientInfo{
+    flex:1;
+}
 
-    .big-avatar{
-        height:180px;
-    }
+.patientInfo b{
+    font-size:14px;
+}
 
-    .patient-data{
-        grid-template-columns:1fr;
-    }
+.patientInfo small{
+    display:block;
+    color:#7890a6;
+    margin-top:4px;
+    font-size:10px;
+}
 
-    .money-box{
-        grid-template-columns:1fr;
-    }
+.arrow{
+    font-size:23px;
+    color:#087fff;
+}
 
-    .money{
-        border-right:0;
-        border-bottom:1px solid #ffffff44;
-    }
+/* ================= PROFILE ================= */
 
-    .form-grid{
-        grid-template-columns:1fr;
-    }
+.profile{
+    margin:16px;
+    background:linear-gradient(135deg,#087fff,#0057b9);
+    color:white;
+    border-radius:21px;
+    padding:18px;
+    text-align:center;
+}
+
+.profile img,
+.profileNoPhoto{
+    width:105px;
+    height:105px;
+    border-radius:50%;
+    border:4px solid white;
+    object-fit:cover;
+    margin:auto;
+}
+
+.profileNoPhoto{
+    background:white;
+    color:#087fff;
+    display:grid;
+    place-items:center;
+    font-size:45px;
+}
+
+.profile h2{
+    margin:9px 0 3px;
+}
+
+.infoCard{
+    margin:12px 15px;
+    background:white;
+    border-radius:18px;
+    padding:15px;
+    box-shadow:0 4px 14px rgba(0,80,160,.08);
+}
+
+.infoCard h3{
+    margin-bottom:10px;
+    color:#0758a8;
+    font-size:15px;
+}
+
+.infoRow{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:8px 0;
+    border-bottom:1px solid #edf4f9;
+    font-size:11px;
+}
+
+.infoRow:last-child{
+    border-bottom:0;
+}
+
+.infoRow span{
+    color:#7890a6;
+}
+
+.treatmentCard{
+    background:#f4faff;
+    border-left:4px solid #087fff;
+    border-radius:11px;
+    padding:12px;
+    margin:9px 0;
+}
+
+.treatmentCard b{
+    font-size:13px;
+}
+
+.treatmentCard p{
+    font-size:10px;
+    color:#617b92;
+    margin:5px 0;
+}
+
+.badge{
+    display:inline-block;
+    border-radius:8px;
+    padding:4px 7px;
+    font-size:9px;
+    font-weight:800;
+}
+
+.paid{
+    background:#e7f9ef;
+    color:#16834a;
+}
+
+.pending{
+    background:#fff1e6;
+    color:#c95c00;
+}
+
+/* ================= PAYMENTS ================= */
+
+.paymentCard{
+    margin:9px 15px;
+    background:white;
+    border-radius:18px;
+    padding:14px;
+    box-shadow:0 4px 14px rgba(0,80,160,.08);
+}
+
+.paymentCard p{
+    font-size:11px;
+    color:#7890a6;
+    margin:7px 0;
+}
+
+/* ================= EMPTY ================= */
+
+.empty{
+    text-align:center;
+    color:#7890a6;
+    padding:45px 20px;
+}
+
+.emptyIcon{
+    font-size:43px;
+    margin-bottom:9px;
+}
+
+/* ================= BOTTOM NAV ================= */
+
+.bottomNav{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(560px,100%);
+    height:68px;
+    background:white;
+    border-top:1px solid #dceefa;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    z-index:50;
+    box-shadow:0 -5px 20px rgba(0,80,160,.08);
+}
+
+.bottomNav button{
+    border:0;
+    background:white;
+    color:#7890a6;
+    font-size:9px;
+}
+
+.bottomNav button div{
+    font-size:21px;
+}
+
+.bottomNav .activeNav{
+    color:#087fff;
+    font-weight:800;
+}
+
+/* ================= TOAST ================= */
+
+#toast{
+    display:none;
+    position:fixed;
+    z-index:100;
+    bottom:82px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#073f78;
+    color:white;
+    border-radius:11px;
+    padding:11px 16px;
+    font-size:12px;
 }
 </style>
 </head>
 
 <body>
 
-<header>
+<div class="app">
 
-<div class="logo">
-    <div class="logo-icon">K</div>
-    <div>
-        <h3>Kadir Baksh</h3>
-        <small>Dental Lab</small>
-    </div>
+<!-- ================= HOME ================= -->
+
+<section id="home" class="screen active">
+
+<header class="header">
+
+<div class="brand">
+
+<div class="logo">🦷</div>
+
+<div>
+<h1>KADIR BUX DENTAL LAB</h1>
+<p>SMART DENTAL RECORD MANAGER</p>
 </div>
 
-<nav>
-    <button onclick="showPatients()">⌂ Home</button>
-    <button onclick="showPatients()">👥 Patients</button>
-    <button onclick="showForm()">＋ New</button>
-</nav>
+</div>
+
+<div class="tagline">
+Better Records.<br>
+<span>Better Dental Care.</span>
+</div>
+
+<div class="headerText">
+Manage patients, treatments & payments — completely offline.
+</div>
 
 </header>
 
 
-<!-- ================= PATIENT LIST ================= -->
+<!-- YOUR PHOTO -->
 
-<div id="patientPage" class="container">
+<div class="hero">
 
-<div class="page-title">
-    <div>
-        <h2>PATIENT <span>LIST</span></h2>
-        <small>Patient Care, Your Priority</small>
-    </div>
+<img src="1000356769.png"
+     alt="Kadir Bux Dental Lab">
 
-    <button class="primary" onclick="showForm()">
-        + Add New Patient
-    </button>
+<div class="heroText">
+
+<b>Professional Dental Care</b>
+
+<span>
+Modern dental records, treatment history
+and payment management.
+</span>
+
+</div>
+
 </div>
 
 
-<div id="formBox" class="form-box">
+<div class="content">
 
-<h3>Add New Patient</h3>
+<div class="title">
+Dashboard Overview
+</div>
+
+
+<div class="stats">
+
+<div class="stat">
+
+<div class="statIcon">👥</div>
+
+<b id="totalPatients">0</b>
+
+<small>Total Patients</small>
+
+</div>
+
+
+<div class="stat">
+
+<div class="statIcon">💰</div>
+
+<b id="pendingAmount">₹0</b>
+
+<small>Pending</small>
+
+</div>
+
+
+<div class="stat">
+
+<div class="statIcon">📅</div>
+
+<b id="todayAppointments">0</b>
+
+<small>Today</small>
+
+</div>
+
+</div>
+
+
+<div class="title">
+Quick Access
+</div>
+
+
+<div class="menuGrid">
+
+<button class="menuCard"
+onclick="openAddPatient()">
+
+<div class="menuIcon">➕</div>
+
+<b>Add New Patient</b>
+
+<small>Create patient record</small>
+
+</button>
+
+
+<button class="menuCard"
+onclick="showScreen('patients')">
+
+<div class="menuIcon">👥</div>
+
+<b>Patient List</b>
+
+<small>View all patients</small>
+
+</button>
+
+
+<button class="menuCard"
+onclick="showScreen('payments')">
+
+<div class="menuIcon">💳</div>
+
+<b>Pending Payments</b>
+
+<small>Outstanding balances</small>
+
+</button>
+
+
+<button class="menuCard"
+onclick="showScreen('appointments')">
+
+<div class="menuIcon">📅</div>
+
+<b>Appointment Dates</b>
+
+<small>Treatment & follow-up</small>
+
+</button>
+
+</div>
+
+
+<div class="title">
+Dental Services
+</div>
+
+
+<div class="specialities">
+
+<div class="speciality">
+<div>🦷</div>
+<b>CROWN</b>
+<small>Dental Crown</small>
+</div>
+
+<div class="speciality">
+<div>😁</div>
+<b>RCT</b>
+<small>Root Canal</small>
+</div>
+
+<div class="speciality">
+<div>🪥</div>
+<b>CLEANING</b>
+<small>Oral Cleaning</small>
+</div>
+
+<div class="speciality">
+<div>🦷</div>
+<b>IMPLANT</b>
+<small>Dental Implant</small>
+</div>
+
+<div class="speciality">
+<div>✨</div>
+<b>FILLING</b>
+<small>Tooth Filling</small>
+</div>
+
+<div class="speciality">
+<div>🩺</div>
+<b>OTHER</b>
+<small>Dental Care</small>
+</div>
+
+</div>
 
 <br>
 
-<div class="form-grid">
+<button class="primary"
+onclick="openAddPatient()">
 
-<div class="form-group">
-<label>Patient Name</label>
-<input id="name" placeholder="Enter patient name">
-</div>
+➕ ADD NEW PATIENT
 
-<div class="form-group">
-<label>Age</label>
-<input id="age" type="number" placeholder="Age">
-</div>
-
-<div class="form-group">
-<label>Gender</label>
-<select id="gender">
-<option>Female</option>
-<option>Male</option>
-<option>Other</option>
-</select>
-</div>
-
-<div class="form-group">
-<label>Mobile Number</label>
-<input id="mobile" placeholder="Mobile number">
-</div>
-
-<div class="form-group">
-<label>Address</label>
-<input id="address" placeholder="Address">
-</div>
-
-<div class="form-group">
-<label>Total Fee</label>
-<input id="fee" type="number" placeholder="Total fee">
-</div>
-
-</div>
-
-<div class="form-buttons">
-
-<button class="save" onclick="addPatient()">
-Save Patient
-</button>
-
-<button class="cancel" onclick="hideForm()">
-Cancel
 </button>
 
 </div>
 
+</section>
+
+
+<!-- ================= ADD PATIENT ================= -->
+
+<section id="addPatient" class="screen">
+
+<div class="pageHeader">
+
+<button class="back"
+onclick="showScreen('home')">
+‹
+</button>
+
+<div>
+
+<h2 id="patientFormTitle">
+Add New Patient
+</h2>
+
+<small>
+Patient registration
+</small>
+
+</div>
+
 </div>
 
 
-<div class="search-box">
+<div class="form">
+
+<div class="photoBox">
+
+<img id="patientPreview"
+class="photoPreview">
+
+<div id="patientPlaceholder"
+style="font-size:12px;color:#7890a6;margin-bottom:8px">
+
+📷 Patient Photo
+
+</div>
+
+
+<label class="photoButton">
+
+📷 Capture / Choose Photo
 
 <input
+type="file"
+id="patientPhoto"
+accept="image/*"
+capture="environment"
+hidden>
+
+</label>
+
+</div>
+
+
+<div class="formGroup">
+
+<label>
+Patient Full Name *
+</label>
+
+<input
+id="patientName"
 type="text"
-id="search"
-placeholder="🔎 Search patient by name or mobile..."
-oninput="searchPatients()">
+placeholder="Enter full name">
 
 </div>
 
 
-<div id="patientList" class="patient-list"></div>
+<div class="formRow">
+
+<div class="formGroup">
+
+<label>Age</label>
+
+<input
+id="patientAge"
+type="number"
+placeholder="Age">
 
 </div>
 
 
+<div class="formGroup">
 
-<!-- ================= PATIENT PROFILE ================= -->
+<label>Gender</label>
 
-<div id="profilePage" class="container profile">
+<select id="patientGender">
 
-<div class="profile-header">
+<option value="">
+Select
+</option>
 
-<button class="back" onclick="showPatients()">
-← Back to Patients
+<option>
+Male
+</option>
+
+<option>
+Female
+</option>
+
+<option>
+Other
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="formGroup">
+
+<label>
+Mobile Number
+</label>
+
+<input
+id="patientMobile"
+type="tel"
+placeholder="Mobile number">
+
+</div>
+
+
+<div class="formGroup">
+
+<label>
+Address
+</label>
+
+<textarea
+id="patientAddress"
+placeholder="Enter address">
+</textarea>
+
+</div>
+
+
+<div class="formGroup">
+
+<label>
+Registration Date
+</label>
+
+<input
+id="registrationDate"
+type="date">
+
+</div>
+
+
+<button
+class="primary"
+onclick="savePatient()">
+
+✔ SAVE PATIENT
+
 </button>
 
-<button class="primary" onclick="showForm()">
-+ New Patient
-</button>
-
 </div>
 
-
-<div class="profile-box">
-
-<h2>PATIENT <span style="color:#a000ff">PROFILE</span></h2>
-
-<br>
+</section>
 
 
-<div class="profile-top">
+<!-- ================= PATIENT LIST ================= -->
+
+<section id="patients" class="screen">
+
+<div class="pageHeader">
+
+<button class="back"
+onclick="showScreen('home')">
+‹
+</button>
 
 <div>
 
-<div id="patientData" class="patient-data"></div>
+<h2>
+Patient List
+</h2>
 
-<div class="contact-buttons">
-
-<button class="call" onclick="callPatient()">☎ Call</button>
-
-<button class="sms" onclick="smsPatient()">✉ SMS</button>
-
-<button class="whatsapp" onclick="whatsappPatient()">◉ WhatsApp</button>
+<small>
+All registered patients
+</small>
 
 </div>
 
 </div>
 
+
+<div class="search">
+
+<input
+id="patientSearch"
+type="search"
+placeholder="🔍 Search by name or phone"
+oninput="renderPatients()">
+
+</div>
+
+
+<div id="patientList">
+</div>
+
+</section>
+
+
+<!-- ================= PROFILE ================= -->
+
+<section id="profile" class="screen">
+
+<div class="pageHeader">
+
+<button class="back"
+onclick="showScreen('patients')">
+‹
+</button>
 
 <div>
 
-<div class="big-avatar">
-    👤
-</div>
+<h2>
+Patient Profile
+</h2>
+
+<small>
+Complete patient record
+</small>
 
 </div>
 
 </div>
 
 
-<!-- MONEY -->
-
-<div class="money-box">
-
-<div class="money">
-<small>TOTAL FEE</small>
-<strong id="profileFee">₹0</strong>
+<div id="profileContent">
 </div>
 
-<div class="money">
-<small>PAID AMOUNT</small>
-<strong id="profilePaid">₹0</strong>
-</div>
-
-<div class="money">
-<small>REMAINING AMOUNT</small>
-<strong id="profileRemaining">₹0</strong>
-</div>
-
-</div>
+</section>
 
 
-<!-- DENTAL CHART -->
+<!-- ================= TREATMENT ================= -->
 
-<div class="section">
+<section id="treatment" class="screen">
 
-<h3>🦷 Dental Chart</h3>
+<div class="pageHeader">
 
-<div class="dental-chart">
+<button class="back"
+onclick="openProfile(currentPatientId)">
+‹
+</button>
 
-<div class="jaw-title">UPPER JAW</div>
+<div>
 
-<div id="upperTeeth" class="teeth"></div>
+<h2>
+Add Treatment
+</h2>
 
-<div class="jaw-title">LOWER JAW</div>
-
-<div id="lowerTeeth" class="teeth"></div>
+<small id="treatmentPatientName">
+</small>
 
 </div>
 
 </div>
 
 
-<!-- TREATMENT -->
+<div class="form">
 
-<div class="section">
 
-<h3>Treatment History</h3>
+<div class="formGroup">
 
-<div class="treatment">
+<label>
+Treatment Type
+</label>
 
-<div class="treatment-head">
+<select id="treatmentType">
 
-<strong>🦷 Dental Caries</strong>
+<option>Extraction</option>
+<option>Filling</option>
+<option>RCT</option>
+<option>Crown</option>
+<option>Implant</option>
+<option>Cleaning</option>
+<option>Other</option>
 
-<span class="status">Pending</span>
-
-</div>
-
-<p>📅 Monday · 10 Aug 2026 · 14:36</p>
-
-<hr><br>
-
-<p><strong>This Visit's Teeth:</strong> #28</p>
-
-<p><strong>Pain Level:</strong> Moderate</p>
-
-<p>💊 Acloc 150mg 3 — Qty: 5</p>
-
-<p>💊 Allnox 250mg 3 — Qty: 5</p>
-
-<p>💊 Betnesol 0.5mg 3 — Qty: 5</p>
-
-<p>💊 CPM 4mg 3 — Qty: 5</p>
-
-<p>💊 Ibgesic Plus 725mg 2.5 — Qty: 5</p>
-
-<hr><br>
-
-<p><strong>Plan:</strong> Kochli nikali, Dalton ki safai ki</p>
-
-<br>
-
-<p>
-Fee: ₹<span id="historyFee">0</span>
-&nbsp;&nbsp;
-<span style="color:green">
-Given: ₹<span id="historyPaid">0</span>
-</span>
-&nbsp;&nbsp;
-<span style="color:#e6a500">
-Remaining: ₹<span id="historyRemaining">0</span>
-</span>
-</p>
+</select>
 
 </div>
 
-</div>
+
+<div class="formGroup">
+
+<label>
+Treatment Notes
+</label>
+
+<textarea
+id="treatmentNotes"
+placeholder="Enter treatment notes">
+</textarea>
 
 </div>
 
+
+<div class="formRow">
+
+<div class="formGroup">
+
+<label>
+Treatment Date
+</label>
+
+<input
+id="treatmentDate"
+type="date">
+
+</div>
+
+
+<div class="formGroup">
+
+<label>
+Next Follow-Up Date
+</label>
+
+<input
+id="followupDate"
+type="date">
+
+</div>
+
+</div>
+
+
+<div class="photoBox">
+
+<img
+id="prescriptionPreview"
+class="photoPreview">
+
+<div
+id="prescriptionPlaceholder"
+style="font-size:12px;color:#7890a6;margin-bottom:8px">
+
+📄 Prescription Photo
+
+</div>
+
+
+<label class="photoButton">
+
+📷 Capture / Choose Prescription
+
+<input
+type="file"
+id="prescriptionPhoto"
+accept="image/*"
+capture="environment"
+hidden>
+
+</label>
+
+</div>
+
+
+<div class="formRow">
+
+<div class="formGroup">
+
+<label>
+Cost (₹)
+</label>
+
+<input
+id="treatmentCost"
+type="number"
+min="0"
+oninput="calculateRemaining()"
+placeholder="0">
+
+</div>
+
+
+<div class="formGroup">
+
+<label>
+Paid Amount (₹)
+</label>
+
+<input
+id="treatmentPaid"
+type="number"
+min="0"
+oninput="calculateRemaining()"
+placeholder="0">
+
+</div>
+
+</div>
+
+
+<div class="formGroup">
+
+<label>
+Remaining Amount
+</label>
+
+<input
+id="treatmentRemaining"
+type="number"
+readonly
+value="0">
+
+</div>
+
+
+<div class="formGroup">
+
+<label>
+Payment Date
+</label>
+
+<input
+id="paymentDate"
+type="date">
+
+</div>
+
+
+<button
+class="primary"
+onclick="saveTreatment()">
+
+✔ SAVE TREATMENT
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ================= PAYMENTS ================= -->
+
+<section id="payments" class="screen">
+
+<div class="pageHeader">
+
+<button class="back"
+onclick="showScreen('home')">
+‹
+</button>
+
+<div>
+
+<h2>
+Payments
+</h2>
+
+<small>
+Pending payment records
+</small>
+
+</div>
+
+</div>
+
+
+<div id="paymentList">
+</div>
+
+</section>
+
+
+<!-- ================= APPOINTMENTS ================= -->
+
+<section id="appointments" class="screen">
+
+<div class="pageHeader">
+
+<button class="back"
+onclick="showScreen('home')">
+‹
+</button>
+
+<div>
+
+<h2>
+Appointment Dates
+</h2>
+
+<small>
+Treatment & follow-up schedule
+</small>
+
+</div>
+
+</div>
+
+
+<div id="appointmentList">
+</div>
+
+</section>
+
+
+<!-- ================= BOTTOM NAV ================= -->
+
+<div class="bottomNav">
+
+<button
+id="navHome"
+onclick="showScreen('home')">
+
+<div>🏠</div>
+Home
+
+</button>
+
+
+<button
+id="navPatients"
+onclick="showScreen('patients')">
+
+<div>👥</div>
+Patients
+
+</button>
+
+
+<button
+id="navPayments"
+onclick="showScreen('payments')">
+
+<div>💳</div>
+Payments
+
+</button>
+
+
+<button
+id="navAppointments"
+onclick="showScreen('appointments')">
+
+<div>📅</div>
+Dates
+
+</button>
+
+</div>
+
+</div>
+
+
+<div id="toast">
 </div>
 
 
 <script>
 
-let patients = JSON.parse(localStorage.getItem("dentalPatients")) || [
+/* ==================================================
+   KADIR BUX DENTAL LAB
+   OFFLINE DATABASE
+================================================== */
 
-{
-id:1,
-name:"Nisha",
-age:"30",
-gender:"Female",
-mobile:"8077245094",
-address:"Saifni",
-fee:750,
-paid:600
-}
-
-];
-
-let currentPatient = null;
+const DATABASE_KEY =
+"KADIR_BUX_DENTAL_LAB_DATABASE";
 
 
-/* ================= PATIENT LIST ================= */
+let patients =
+JSON.parse(
+localStorage.getItem(DATABASE_KEY) || "[]"
+);
 
-function renderPatients(data=patients){
 
-const list=document.getElementById("patientList");
+let currentPatientId = null;
 
-list.innerHTML="";
+let editingPatient = null;
 
-if(data.length===0){
 
-list.innerHTML=`
-<div style="grid-column:1/-1;text-align:center;padding:40px">
-<h3>No Patient Found</h3>
-<p>Add a new patient to get started.</p>
-</div>`;
+/* ==================================================
+   BASIC FUNCTIONS
+================================================== */
 
-return;
+function today(){
+
+    const d = new Date();
+
+    return d.getFullYear()
+    + "-"
+    + String(d.getMonth()+1).padStart(2,"0")
+    + "-"
+    + String(d.getDate()).padStart(2,"0");
 
 }
 
 
-data.forEach(patient=>{
+function formatDate(date){
 
-let first=patient.name.charAt(0).toUpperCase();
+    if(!date){
+        return "-";
+    }
 
-let remaining=patient.fee-patient.paid;
+    const d =
+    new Date(date + "T00:00:00");
 
-list.innerHTML+=`
+    if(isNaN(d.getTime())){
+        return date;
+    }
 
-<div class="patient-card" onclick="openProfile(${patient.id})">
+    return d.toLocaleDateString(
+        "en-IN",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
 
-<div class="patient-top">
+}
 
-<div class="avatar">${first}</div>
 
-<div class="patient-info">
+function escapeHTML(text){
 
-<h3>${patient.name}</h3>
+    if(text === null ||
+       text === undefined){
 
-<p>${patient.age} Years · ${patient.gender}</p>
+        return "";
 
-</div>
+    }
 
-</div>
+    return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
-<div class="details">
+}
 
-<p>📱 ${patient.mobile}</p>
 
-<p>📍 ${patient.address}</p>
+function saveDatabase(){
 
-<p>💰 Fee: ₹${patient.fee}</p>
+    localStorage.setItem(
+        DATABASE_KEY,
+        JSON.stringify(patients)
+    );
 
-<p>🟢 Paid: ₹${patient.paid}
-&nbsp;&nbsp;
-<span style="color:#e6a500">
-Remaining: ₹${remaining}
-</span>
-</p>
+    updateDashboard();
 
-</div>
+}
 
-<div class="actions">
 
-<button onclick="event.stopPropagation();callNumber('${patient.mobile}')">
-☎ Call
-</button>
+/* ==================================================
+   SCREEN NAVIGATION
+================================================== */
 
-<button onclick="event.stopPropagation();openProfile(${patient.id})">
-👤 Profile
-</button>
+function showScreen(id){
 
-</div>
+    document
+    .querySelectorAll(".screen")
+    .forEach(screen => {
 
-</div>
+        screen.classList.remove("active");
 
-`;
+    });
+
+
+    const screen =
+    document.getElementById(id);
+
+    if(screen){
+        screen.classList.add("active");
+    }
+
+
+    document
+    .querySelectorAll(".bottomNav button")
+    .forEach(btn => {
+
+        btn.classList.remove("activeNav");
+
+    });
+
+
+    if(id === "home"){
+        document
+        .getElementById("navHome")
+        .classList.add("activeNav");
+    }
+
+    if(id === "patients"){
+        document
+        .getElementById("navPatients")
+        .classList.add("activeNav");
+
+        renderPatients();
+    }
+
+    if(id === "payments"){
+        document
+        .getElementById("navPayments")
+        .classList.add("activeNav");
+
+        renderPayments();
+    }
+
+    if(id === "appointments"){
+        document
+        .getElementById("navAppointments")
+        .classList.add("activeNav");
+
+        renderAppointments();
+    }
+
+
+    updateDashboard();
+
+    window.scrollTo(0,0);
+
+}
+
+
+/* ==================================================
+   PATIENT ID
+================================================== */
+
+function generatePatientID(){
+
+    let highest = 0;
+
+
+    patients.forEach(patient => {
+
+        const number =
+        parseInt(
+            String(patient.id)
+            .replace("KB","")
+        ) || 0;
+
+
+        if(number > highest){
+            highest = number;
+        }
+
+    });
+
+
+    return "KB"
+    + String(highest + 1)
+    .padStart(3,"0");
+
+}
+
+
+/* ==================================================
+   ADD PATIENT
+================================================== */
+
+function openAddPatient(){
+
+    editingPatient = null;
+
+
+    document
+    .getElementById("patientFormTitle")
+    .textContent =
+    "Add New Patient";
+
+
+    document
+    .getElementById("patientName")
+    .value = "";
+
+
+    document
+    .getElementById("patientAge")
+    .value = "";
+
+
+    document
+    .getElementById("patientGender")
+    .value = "";
+
+
+    document
+    .getElementById("patientMobile")
+    .value = "";
+
+
+    document
+    .getElementById("patientAddress")
+    .value = "";
+
+
+    document
+    .getElementById("registrationDate")
+    .value = today();
+
+
+    document
+    .getElementById("patientPhoto")
+    .value = "";
+
+
+    document
+    .getElementById("patientPreview")
+    .style.display = "none";
+
+
+    document
+    .getElementById("patientPlaceholder")
+    .style.display = "block";
+
+
+    showScreen("addPatient");
+
+}
+
+
+/* ==================================================
+   PATIENT PHOTO
+================================================== */
+
+document
+.getElementById("patientPhoto")
+.addEventListener(
+"change",
+function(event){
+
+    const file =
+    event.target.files[0];
+
+    if(!file){
+        return;
+    }
+
+
+    const reader =
+    new FileReader();
+
+
+    reader.onload =
+    function(){
+
+        document
+        .getElementById("patientPreview")
+        .src = reader.result;
+
+
+        document
+        .getElementById("patientPreview")
+        .style.display = "block";
+
+
+        document
+        .getElementById("patientPlaceholder")
+        .style.display = "none";
+
+    };
+
+
+    reader.readAsDataURL(file);
 
 });
 
+
+/* ==================================================
+   PRESCRIPTION PHOTO
+================================================== */
+
+document
+.getElementById("prescriptionPhoto")
+.addEventListener(
+"change",
+function(event){
+
+    const file =
+    event.target.files[0];
+
+    if(!file){
+        return;
+    }
+
+
+    const reader =
+    new FileReader();
+
+
+    reader.onload =
+    function(){
+
+        document
+        .getElementById("prescriptionPreview")
+        .src = reader.result;
+
+
+        document
+        .getElementById("prescriptionPreview")
+        .style.display = "block";
+
+
+        document
+        .getElementById("prescriptionPlaceholder")
+        .style.display = "none";
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+});
+
+
+/* ==================================================
+   SAVE PATIENT
+================================================== */
+
+function savePatient(){
+
+    const name =
+    document
+    .getElementById("patientName")
+    .value
+    .trim();
+
+
+    if(!name){
+
+        showToast(
+            "Please enter patient name"
+        );
+
+        return;
+
+    }
+
+
+    const preview =
+    document
+    .getElementById("patientPreview")
+    .src;
+
+
+    const photo =
+    preview.startsWith("data:")
+    ? preview
+    : "";
+
+
+    if(editingPatient){
+
+        editingPatient.name = name;
+
+
+        editingPatient.age =
+        document
+        .getElementById("patientAge")
+        .value;
+
+
+        editingPatient.gender =
+        document
+        .getElementById("patientGender")
+        .value;
+
+
+        editingPatient.mobile =
+        document
+        .getElementById("patientMobile")
+        .value;
+
+
+        editingPatient.address =
+        document
+        .getElementById("patientAddress")
+        .value;
+
+
+        editingPatient.registrationDate =
+        document
+        .getElementById("registrationDate")
+        .value;
+
+
+        if(photo){
+            editingPatient.photo = photo;
+        }
+
+
+        saveDatabase();
+
+
+        showToast(
+            "Patient updated successfully"
+        );
+
+
+        openProfile(
+            editingPatient.id
+        );
+
+
+        return;
+
+    }
+
+
+    const patient = {
+
+        id:
+        generatePatientID(),
+
+        name:name,
+
+        age:
+        document
+        .getElementById("patientAge")
+        .value,
+
+        gender:
+        document
+        .getElementById("patientGender")
+        .value,
+
+        mobile:
+        document
+        .getElementById("patientMobile")
+        .value,
+
+        address:
+        document
+        .getElementById("patientAddress")
+        .value,
+
+        registrationDate:
+        document
+        .getElementById("registrationDate")
+        .value,
+
+        photo:photo,
+
+        treatments:[]
+
+    };
+
+
+    patients.push(patient);
+
+
+    saveDatabase();
+
+
+    showToast(
+        "Patient saved: " + patient.id
+    );
+
+
+    openProfile(patient.id);
+
 }
 
 
-/* ================= SEARCH ================= */
+/* ==================================================
+   PATIENT LIST
+================================================== */
 
-function searchPatients(){
+function renderPatients(){
 
-let value=document
-.getElementById("search")
-.value
-.toLowerCase();
+    const container =
+    document
+    .getElementById("patientList");
 
-let filtered=patients.filter(p=>
-p.name.toLowerCase().includes(value) ||
-p.mobile.includes(value)
-);
 
-renderPatients(filtered);
+    const search =
+    document
+    .getElementById("patientSearch")
+    .value
+    .toLowerCase();
+
+
+    const filtered =
+    patients.filter(patient => {
+
+        return patient.name
+        .toLowerCase()
+        .includes(search)
+
+        ||
+
+        String(patient.mobile || "")
+        .includes(search);
+
+    });
+
+
+    if(filtered.length === 0){
+
+        container.innerHTML = `
+
+        <div class="empty">
+
+            <div class="emptyIcon">
+                👥
+            </div>
+
+            No patients found.
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    filtered.forEach(patient => {
+
+        let lastVisit = "";
+
+
+        if(patient.treatments.length){
+
+            const dates =
+            patient.treatments
+            .map(t => t.date)
+            .filter(Boolean)
+            .sort();
+
+
+            lastVisit =
+            dates.length
+            ? dates[dates.length-1]
+            : "";
+
+        }
+
+
+        const image =
+        patient.photo
+
+        ?
+
+        `<img
+        class="patientPhoto"
+        src="${patient.photo}">`
+
+        :
+
+        `<div class="patientPhoto">
+            🦷
+        </div>`;
+
+
+        container.innerHTML += `
+
+        <div
+        class="patientCard"
+        onclick="openProfile('${patient.id}')">
+
+            <div class="patient">
+
+                ${image}
+
+                <div class="patientInfo">
+
+                    <b>
+                        ${escapeHTML(patient.name)}
+                    </b>
+
+                    <small>
+                        ${patient.id}
+                        •
+                        ${escapeHTML(
+                            patient.mobile || "No mobile"
+                        )}
+                    </small>
+
+                    <small>
+                        Last Visit:
+                        ${formatDate(lastVisit)}
+                    </small>
+
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
 
 }
 
 
-/* ================= ADD PATIENT ================= */
-
-function addPatient(){
-
-let name=document.getElementById("name").value.trim();
-
-if(!name){
-
-alert("Please enter patient name");
-
-return;
-
-}
-
-let patient={
-
-id:Date.now(),
-
-name:name,
-
-age:document.getElementById("age").value,
-
-gender:document.getElementById("gender").value,
-
-mobile:document.getElementById("mobile").value,
-
-address:document.getElementById("address").value,
-
-fee:Number(document.getElementById("fee").value)||0,
-
-paid:0
-
-};
-
-
-patients.push(patient);
-
-localStorage.setItem(
-"dentalPatients",
-JSON.stringify(patients)
-);
-
-clearForm();
-
-hideForm();
-
-renderPatients();
-
-alert("Patient added successfully!");
-
-}
-
-
-/* ================= PROFILE ================= */
+/* ==================================================
+   OPEN PROFILE
+================================================== */
 
 function openProfile(id){
 
-currentPatient=patients.find(p=>p.id===id);
+    const patient =
+    patients.find(
+        p => p.id === id
+    );
 
-if(!currentPatient)return;
 
-document.getElementById("patientPage")
-.style.display="none";
+    if(!patient){
+        return;
+    }
 
-document.getElementById("profilePage")
-.style.display="block";
 
-let p=currentPatient;
+    currentPatientId = id;
 
-let remaining=p.fee-p.paid;
 
-document.getElementById("patientData").innerHTML=`
+    let totalCost = 0;
+    let totalPaid = 0;
 
-<div class="data-row">
-<span>Patient Name</span>
-<strong>${p.name}</strong>
-</div>
 
-<div class="data-row">
-<span>Patient ID</span>
-<strong>#${p.id}</strong>
-</div>
+    patient.treatments.forEach(
+    treatment => {
 
-<div class="data-row">
-<span>Age / Female</span>
-<strong>${p.age} Years · ${p.gender}</strong>
-</div>
+        totalCost +=
+        Number(treatment.cost || 0);
 
-<div class="data-row">
-<span>Mobile Number</span>
-<strong>${p.mobile}</strong>
-</div>
+        totalPaid +=
+        Number(treatment.paid || 0);
 
-<div class="data-row">
-<span>Address</span>
-<strong>${p.address}</strong>
-</div>
+    });
 
-<div class="data-row">
-<span>Registered On</span>
-<strong>10/8/2026</strong>
-</div>
 
-`;
+    const remaining =
+    Math.max(
+        0,
+        totalCost - totalPaid
+    );
 
-document.getElementById("profileFee").innerText="₹"+p.fee;
 
-document.getElementById("profilePaid").innerText="₹"+p.paid;
+    let photoHTML;
 
-document.getElementById("profileRemaining")
-.innerText="₹"+remaining;
 
-document.getElementById("historyFee").innerText=p.fee;
+    if(patient.photo){
 
-document.getElementById("historyPaid").innerText=p.paid;
+        photoHTML = `
 
-document.getElementById("historyRemaining")
-.innerText=remaining;
+        <img
+        src="${patient.photo}"
+        alt="Patient Photo">
 
-createDentalChart();
+        `;
 
-window.scrollTo(0,0);
+    }else{
+
+        photoHTML = `
+
+        <div class="profileNoPhoto">
+            🦷
+        </div>
+
+        `;
+
+    }
+
+
+    let treatmentsHTML = "";
+
+
+    if(patient.treatments.length === 0){
+
+        treatmentsHTML = `
+
+        <div class="empty">
+
+            No treatment records yet.
+
+        </div>
+
+        `;
+
+    }else{
+
+        patient.treatments.forEach(
+        (treatment,index) => {
+
+            const balance =
+            Math.max(
+                0,
+                Number(treatment.cost || 0)
+                -
+                Number(treatment.paid || 0)
+            );
+
+
+            const status =
+            balance > 0
+
+            ?
+
+            `<span class="badge pending">
+                ₹${balance} PENDING
+            </span>`
+
+            :
+
+            `<span class="badge paid">
+                FULLY PAID
+            </span>`;
+
+
+            treatmentsHTML += `
+
+            <div class="treatmentCard">
+
+                <b>
+                    ${escapeHTML(
+                        treatment.type
+                    )}
+                </b>
+
+                ${status}
+
+
+                <p>
+                    🗓 Treatment:
+                    ${formatDate(
+                        treatment.date
+                    )}
+                </p>
+
+
+                <p>
+                    🔄 Follow-Up:
+                    ${formatDate(
+                        treatment.followup
+                    )}
+                </p>
+
+
+                <p>
+                    💰 Cost:
+                    ₹${treatment.cost || 0}
+
+                    &nbsp; | &nbsp;
+
+                    Paid:
+                    ₹${treatment.paid || 0}
+                </p>
+
+
+                <p>
+                    💳 Payment Date:
+                    ${formatDate(
+                        treatment.paymentDate
+                    )}
+                </p>
+
+
+                <p>
+                    ${escapeHTML(
+                        treatment.notes || "No notes"
+                    )}
+                </p>
+
+
+                ${
+                    treatment.prescription
+
+                    ?
+
+                    `<img
+                    src="${treatment.prescription}"
+                    style="
+                    max-width:100%;
+                    max-height:180px;
+                    border-radius:10px;
+                    margin-top:6px;
+                    ">`
+
+                    :
+
+                    ""
+                }
+
+
+                <br>
+
+
+                <button
+                class="danger"
+                onclick="
+                deleteTreatment(
+                    '${patient.id}',
+                    ${index}
+                )">
+
+                    🗑 Delete Treatment
+
+                </button>
+
+            </div>
+
+            `;
+
+        });
+
+    }
+
+
+    document
+    .getElementById("profileContent")
+    .innerHTML = `
+
+    <div class="profile">
+
+        ${photoHTML}
+
+        <h2>
+            ${escapeHTML(patient.name)}
+        </h2>
+
+        <small>
+            Patient ID:
+            ${patient.id}
+        </small>
+
+    </div>
+
+
+    <div class="infoCard">
+
+        <h3>
+            Personal Details
+        </h3>
+
+
+        <div class="infoRow">
+            <span>Age</span>
+            <b>${escapeHTML(
+                patient.age || "-"
+            )}</b>
+        </div>
+
+
+        <div class="infoRow">
+            <span>Gender</span>
+            <b>${escapeHTML(
+                patient.gender || "-"
+            )}</b>
+        </div>
+
+
+        <div class="infoRow">
+            <span>Mobile</span>
+            <b>${escapeHTML(
+                patient.mobile || "-"
+            )}</b>
+        </div>
+
+
+        <div class="infoRow">
+            <span>Registration Date</span>
+            <b>
+                ${formatDate(
+                    patient.registrationDate
+                )}
+            </b>
+        </div>
+
+
+        <div class="infoRow">
+            <span>Address</span>
+            <b>${escapeHTML(
+                patient.address || "-"
+            )}</b>
+        </div>
+
+    </div>
+
+
+    <div class="infoCard">
+
+        <h3>
+            Payment Summary
+        </h3>
+
+
+        <div class="infoRow">
+            <span>Total Cost</span>
+            <b>
+                ₹${totalCost}
+            </b>
+        </div>
+
+
+        <div class="infoRow">
+            <span>Total Paid</span>
+            <b>
+                ₹${totalPaid}
+            </b>
+        </div>
+
+
+        <div class="infoRow">
+            <span>Remaining</span>
+
+            <b style="color:#d35c00">
+                ₹${remaining}
+            </b>
+
+        </div>
+
+    </div>
+
+
+    <div style="
+        margin:16px;
+        display:flex;
+        gap:8px;
+        flex-wrap:wrap;
+    ">
+
+        <button
+        class="primary"
+        style="flex:1"
+        onclick="
+        openTreatment(
+            '${patient.id}'
+        )">
+
+            ➕ ADD TREATMENT
+
+        </button>
+
+
+        <button
+        class="secondary"
+        onclick="
+        editPatient(
+            '${patient.id}'
+        )">
+
+            ✏️ Edit
+
+        </button>
+
+
+        <button
+        class="danger"
+        onclick="
+        deletePatient(
+            '${patient.id}'
+        )">
+
+            🗑 Delete
+
+        </button>
+
+    </div>
+
+
+    <div class="infoCard">
+
+        <h3>
+            Treatment History
+        </h3>
+
+        ${treatmentsHTML}
+
+    </div>
+
+    `;
+
+
+    showScreen("profile");
 
 }
 
 
-/* ================= DENTAL CHART ================= */
+/* ==================================================
+   EDIT PATIENT
+================================================== */
 
-function createDentalChart(){
+function editPatient(id){
 
-let upper=document.getElementById("upperTeeth");
-
-let lower=document.getElementById("lowerTeeth");
-
-upper.innerHTML="";
-lower.innerHTML="";
-
-for(let i=1;i<=16;i++){
-
-upper.innerHTML+=`
-<div class="tooth" onclick="selectTooth(this)">
-${i}
-</div>
-`;
-
-}
-
-for(let i=17;i<=32;i++){
-
-lower.innerHTML+=`
-<div class="tooth" onclick="selectTooth(this)">
-${i}
-</div>
-`;
-
-}
-
-}
+    const patient =
+    patients.find(
+        p => p.id === id
+    );
 
 
-function selectTooth(element){
-
-element.classList.toggle("selected");
-
-}
+    if(!patient){
+        return;
+    }
 
 
-/* ================= CONTACT ================= */
-
-function callNumber(number){
-
-window.location.href="tel:"+number;
-
-}
-
-function callPatient(){
-
-if(currentPatient)
-callNumber(currentPatient.mobile);
-
-}
-
-function smsPatient(){
-
-if(currentPatient)
-window.location.href="sms:"+currentPatient.mobile;
-
-}
-
-function whatsappPatient(){
-
-if(currentPatient){
-
-window.open(
-"https://wa.me/91"+currentPatient.mobile,
-"_blank"
-);
-
-}
-
-}
+    editingPatient = patient;
 
 
-/* ================= FORM ================= */
+    document
+    .getElementById("patientFormTitle")
+    .textContent =
+    "Edit Patient";
 
-function showForm(){
 
-document.getElementById("formBox")
-.style.display="block";
+    document
+    .getElementById("patientName")
+    .value =
+    patient.name;
 
-window.scrollTo(0,0);
 
-}
+    document
+    .getElementById("patientAge")
+    .value =
+    patient.age;
 
-function hideForm(){
 
-document.getElementById("formBox")
-.style.display="none";
+    document
+    .getElementById("patientGender")
+    .value =
+    patient.gender;
 
-}
 
-function clearForm(){
+    document
+    .getElementById("patientMobile")
+    .value =
+    patient.mobile;
 
-document.querySelectorAll(
-"#formBox input"
-).forEach(input=>input.value="");
+
+    document
+    .getElementById("patientAddress")
+    .value =
+    patient.address;
+
+
+    document
+    .getElementById("registrationDate")
+    .value =
+    patient.registrationDate;
+
+
+    if(patient.photo){
+
+        document
+        .getElementById("patientPreview")
+        .src =
+        patient.photo;
+
+
+        document
+        .getElementById("patientPreview")
+        .style.display =
+        "block";
+
+
+        document
+        .getElementById("patientPlaceholder")
+        .style.display =
+        "none";
+
+    }else{
+
+        document
+        .getElementById("patientPreview")
+        .style.display =
+        "none";
+
+
+        document
+        .getElementById("patientPlaceholder")
+        .style.display =
+        "block";
+
+    }
+
+
+    showScreen("addPatient");
 
 }
 
 
-/* ================= PAGES ================= */
+/* ==================================================
+   DELETE PATIENT
+================================================== */
 
-function showPatients(){
+function deletePatient(id){
 
-document.getElementById("profilePage")
-.style.display="none";
+    if(!confirm(
+        "Delete this patient and all treatment records?"
+    )){
+        return;
+    }
 
-document.getElementById("patientPage")
-.style.display="block";
 
-renderPatients();
+    patients =
+    patients.filter(
+        patient => patient.id !== id
+    );
+
+
+    saveDatabase();
+
+
+    showToast(
+        "Patient deleted"
+    );
+
+
+    showScreen("patients");
 
 }
 
 
-/* START */
+/* ==================================================
+   ADD TREATMENT
+================================================== */
 
-renderPatients();
+function openTreatment(id){
+
+    currentPatientId = id;
+
+
+    const patient =
+    patients.find(
+        p => p.id === id
+    );
+
+
+    if(patient){
+
+        document
+        .getElementById(
+            "treatmentPatientName"
+        )
+        .textContent =
+        patient.name
+        + " • "
+        + patient.id;
+
+    }
+
+
+    document
+    .getElementById("treatmentType")
+    .value =
+    "Extraction";
+
+
+    document
+    .getElementById("treatmentNotes")
+    .value =
+    "";
+
+
+    document
+    .getElementById("treatmentDate")
+    .value =
+    today();
+
+
+    document
+    .getElementById("followupDate")
+    .value =
+    "";
+
+
+    document
+    .getElementById("treatmentCost")
+    .value =
+    "";
+
+
+    document
+    .getElementById("treatmentPaid")
+    .value =
+    "";
+
+
+    document
+    .getElementById("treatmentRemaining")
+    .value =
+    "0";
+
+
+    document
+    .getElementById("paymentDate")
+    .value =
+    today();
+
+
+    document
+    .getElementById("prescriptionPhoto")
+    .value =
+    "";
+
+
+    document
+    .getElementById("prescriptionPreview")
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById("prescriptionPlaceholder")
+    .style.display =
+    "block";
+
+
+    showScreen("treatment");
+
+}
+
+
+/* ==================================================
+   REMAINING CALCULATION
+================================================== */
+
+function calculateRemaining(){
+
+    const cost =
+    Number(
+        document
+        .getElementById("treatmentCost")
+        .value
+    ) || 0;
+
+
+    const paid =
+    Number(
+        document
+        .getElementById("treatmentPaid")
+        .value
+    ) || 0;
+
+
+    const remaining =
+    Math.max(
+        0,
+        cost - paid
+    );
+
+
+    document
+    .getElementById("treatmentRemaining")
+    .value =
+    remaining;
+
+}
+
+
+/* ==================================================
+   SAVE TREATMENT
+================================================== */
+
+function saveTreatment(){
+
+    const patient =
+    patients.find(
+        p => p.id === currentPatientId
+    );
+
+
+    if(!patient){
+        return;
+    }
+
+
+    const cost =
+    Number(
+        document
+        .getElementById("treatmentCost")
+        .value
+    ) || 0;
+
+
+    const paid =
+    Number(
+        document
+        .getElementById("treatmentPaid")
+        .value
+    ) || 0;
+
+
+    if(paid > cost){
+
+        showToast(
+            "Paid amount cannot exceed cost"
+        );
+
+        return;
+
+    }
+
+
+    const prescription =
+    document
+    .getElementById(
+        "prescriptionPreview"
+    )
+    .src;
+
+
+    const treatment = {
+
+        treatmentId:
+        "TR" + Date.now(),
+
+        type:
+        document
+        .getElementById(
+            "treatmentType"
+        )
+        .value,
+
+        notes:
+        document
+        .getElementById(
+            "treatmentNotes"
+        )
+        .value,
+
+        date:
+        document
+        .getElementById(
+            "treatmentDate"
+        )
+        .value,
+
+        followup:
+        document
+        .getElementById(
+            "followupDate"
+        )
+        .value,
+
+        prescription:
+        prescription.startsWith("data:")
+        ? prescription
+        : "",
+
+        cost:cost,
+
+        paid:paid,
+
+        remaining:
+        Math.max(
+            0,
+            cost-paid
+        ),
+
+        paymentDate:
+        document
+        .getElementById(
+            "paymentDate"
+        )
+        .value || today()
+
+    };
+
+
+    patient.treatments.push(
+        treatment
+    );
+
+
+    saveDatabase();
+
+
+    showToast(
+        "Treatment saved successfully"
+    );
+
+
+    openProfile(
+        patient.id
+    );
+
+}
+
+
+/* ==================================================
+   DELETE TREATMENT
+================================================== */
+
+function deleteTreatment(
+    patientId,
+    index
+){
+
+    if(!confirm(
+        "Delete this treatment record?"
+    )){
+        return;
+    }
+
+
+    const patient =
+    patients.find(
+        p => p.id === patientId
+    );
+
+
+    if(!patient){
+        return;
+    }
+
+
+    patient.treatments.splice(
+        index,
+        1
+    );
+
+
+    saveDatabase();
+
+
+    openProfile(
+        patientId
+    );
+
+}
+
+
+/* ==================================================
+   PENDING PAYMENTS
+================================================== */
+
+function renderPayments(){
+
+    const container =
+    document
+    .getElementById(
+        "paymentList"
+    );
+
+
+    let records = [];
+
+
+    patients.forEach(
+    patient => {
+
+        patient.treatments.forEach(
+        treatment => {
+
+            const remaining =
+            Math.max(
+                0,
+                Number(treatment.cost || 0)
+                -
+                Number(treatment.paid || 0)
+            );
+
+
+            if(remaining > 0){
+
+                records.push({
+
+                    patient:patient,
+
+                    treatment:treatment,
+
+                    remaining:remaining
+
+                });
+
+            }
+
+        });
+
+    });
+
+
+    if(records.length === 0){
+
+        container.innerHTML = `
+
+        <div class="empty">
+
+            <div class="emptyIcon">
+                ✅
+            </div>
+
+            <b>
+                No Pending Payments
+            </b>
+
+            <p>
+                All payments are clear.
+            </p>
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    records.forEach(
+    record => {
+
+        container.innerHTML += `
+
+        <div class="paymentCard">
+
+            <b>
+                ${escapeHTML(
+                    record.patient.name
+                )}
+            </b>
+
+
+            <span
+            class="badge pending"
+            style="float:right">
+
+                ₹${record.remaining}
+                PENDING
+
+            </span>
+
+
+            <p>
+
+                ${record.patient.id}
+
+                •
+
+                ${escapeHTML(
+                    record.treatment.type
+                )}
+
+            </p>
+
+
+            <p>
+
+                Total:
+                ₹${record.treatment.cost}
+
+                &nbsp; | &nbsp;
+
+                Paid:
+                ₹${record.treatment.paid}
+
+            </p>
+
+
+            <p>
+
+                Treatment:
+                ${formatDate(
+                    record.treatment.date
+                )}
+
+            </p>
+
+
+            <button
+            class="secondary"
+            onclick="
+            openProfile(
+                '${record.patient.id}'
+            )">
+
+                View Patient
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+/* ==================================================
+   APPOINTMENTS
+================================================== */
+
+function renderAppointments(){
+
+    const container =
+    document
+    .getElementById(
+        "appointmentList"
+    );
+
+
+    let appointments = [];
+
+
+    patients.forEach(
+    patient => {
+
+        patient.treatments.forEach(
+        treatment => {
+
+            if(treatment.date){
+
+                appointments.push({
+
+                    date:
+                    treatment.date,
+
+                    type:
+                    "Treatment",
+
+                    treatment:
+                    treatment,
+
+                    patient:
+                    patient
+
+                });
+
+            }
+
+
+            if(treatment.followup){
+
+                appointments.push({
+
+                    date:
+                    treatment.followup,
+
+                    type:
+                    "Follow-Up",
+
+                    treatment:
+                    treatment,
+
+                    patient:
+                    patient
+
+                });
+
+            }
+
+        });
+
+    });
+
+
+    appointments.sort(
+        (a,b) =>
+        a.date.localeCompare(
+            b.date
+        )
+    );
+
+
+    if(appointments.length === 0){
+
+        container.innerHTML = `
+
+        <div class="empty">
+
+            <div class="emptyIcon">
+                📅
+            </div>
+
+            No appointment dates.
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    appointments.forEach(
+    appointment => {
+
+        const isToday =
+        appointment.date === today();
+
+
+        container.innerHTML += `
+
+        <div class="paymentCard">
+
+            <b>
+                ${escapeHTML(
+                    appointment.patient.name
+                )}
+            </b>
+
+
+            <span
+            class="badge
+            ${isToday ? "paid" : "pending"}"
+            style="float:right">
+
+                ${isToday
+                ? "TODAY"
+                : appointment.type}
+
+            </span>
+
+
+            <p>
+
+                📅
+                ${formatDate(
+                    appointment.date
+                )}
+
+            </p>
+
+
+            <p>
+
+                ${appointment.patient.id}
+
+                •
+
+                ${escapeHTML(
+                    appointment.treatment.type
+                )}
+
+            </p>
+
+
+            <button
+            class="secondary"
+            onclick="
+            openProfile(
+                '${appointment.patient.id}'
+            )">
+
+                View Patient
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+/* ==================================================
+   DASHBOARD
+================================================== */
+
+function updateDashboard(){
+
+    let pending = 0;
+
+    let todayAppointments = 0;
+
+
+    patients.forEach(
+    patient => {
+
+        patient.treatments.forEach(
+        treatment => {
+
+            pending +=
+            Math.max(
+                0,
+                Number(treatment.cost || 0)
+                -
+                Number(treatment.paid || 0)
+            );
+
+
+            if(
+                treatment.date === today()
+                ||
+                treatment.followup === today()
+            ){
+
+                todayAppointments++;
+
+            }
+
+        });
+
+    });
+
+
+    document
+    .getElementById(
+        "totalPatients"
+    )
+    .textContent =
+    patients.length;
+
+
+    document
+    .getElementById(
+        "pendingAmount"
+    )
+    .textContent =
+    "₹" + pending;
+
+
+    document
+    .getElementById(
+        "todayAppointments"
+    )
+    .textContent =
+    todayAppointments;
+
+}
+
+
+/* ==================================================
+   TOAST
+================================================== */
+
+function showToast(message){
+
+    const toast =
+    document
+    .getElementById("toast");
+
+
+    toast.textContent =
+    message;
+
+
+    toast.style.display =
+    "block";
+
+
+    setTimeout(
+        function(){
+
+            toast.style.display =
+            "none";
+
+        },
+        2200
+    );
+
+}
+
+
+/* ==================================================
+   INITIALIZE
+================================================== */
+
+document
+.getElementById(
+    "registrationDate"
+)
+.value =
+today();
+
+
+document
+.getElementById(
+    "treatmentDate"
+)
+.value =
+today();
+
+
+document
+.getElementById(
+    "paymentDate"
+)
+.value =
+today();
+
+
+updateDashboard();
+
+
+document
+.getElementById("navHome")
+.classList.add("activeNav");
 
 </script>
 
