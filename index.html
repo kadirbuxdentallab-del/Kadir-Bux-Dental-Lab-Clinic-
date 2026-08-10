@@ -20,18 +20,65 @@
     const { useState, useEffect } = React;
 
     function MainApp() {
-      // Current Page State (Default: 'dashboard')
-      const [currentPage, setCurrentPage] = useState('dashboard');
-      const [selectedPatient, setSelectedPatient] = useState(null);
+      // Navigation State (Default Screen = 'dashboard')
+      const [currentView, setCurrentView] = useState('dashboard');
       const [lang, setLang] = useState('English');
 
-      useEffect(() => {
-        if (window.lucide) {
-          window.lucide.createIcons();
-        }
-      }, [currentPage]);
+      // Sample Patient Data
+      const [patients, setPatients] = useState([
+        { id: 'P-101', name: 'Nisha', phone: '8077245094', age: '30', treatment: 'RCT', totalFee: '600', advance: '450', balance: '150' },
+        { id: 'P-102', name: 'Shah Jahan', phone: '9897588692', age: '35', treatment: 'Scaling', totalFee: '2000', advance: '2000', balance: '0' },
+        { id: 'P-103', name: 'Muskan', phone: '7820050319', age: '39', treatment: 'Extraction', totalFee: '350', advance: '350', balance: '0' }
+      ]);
 
-      // Action Buttons List
+      // New Patient Form State
+      const [formData, setFormData] = useState({
+        fullName: '', age: '', gender: 'Male', mobile: '', address: '',
+        patientPhoto: null, medicalHistory: [], chiefComplaint: '',
+        treatmentPlan: '', totalFee: '', advancePaid: '', paymentMode: 'Cash'
+      });
+
+      useEffect(() => {
+        if (window.lucide) { window.lucide.createIcons(); }
+      }, [currentView, formData.patientPhoto]);
+
+      // Photo Upload Handler
+      const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onloadend = () => setFormData({ ...formData, patientPhoto: reader.result });
+          reader.readAsDataURL(file);
+        }
+      };
+
+      // Medical History Checkbox
+      const handleCheckboxChange = (disease) => {
+        const updated = formData.medicalHistory.includes(disease)
+          ? formData.medicalHistory.filter(item => item !== disease)
+          : [...formData.medicalHistory, disease];
+        setFormData({ ...formData, medicalHistory: updated });
+      };
+
+      // Form Submit (Add Patient to List)
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        const newPatient = {
+          id: 'P-' + Math.floor(1000 + Math.random() * 9000),
+          name: formData.fullName,
+          phone: formData.mobile,
+          age: formData.age,
+          treatment: formData.treatmentPlan || 'Consultation',
+          totalFee: formData.totalFee || '0',
+          advance: formData.advancePaid || '0',
+          balance: (Number(formData.totalFee || 0) - Number(formData.advancePaid || 0)).toString()
+        };
+
+        setPatients([newPatient, ...patients]);
+        alert('Patient Registered Successfully!');
+        setCurrentView('dashboard'); // Return to Dashboard
+      };
+
       const actionButtons = [
         { id: 'new-patient', title: 'New Patient', icon: 'user-plus' },
         { id: 'patient-list', title: 'Patient List', icon: 'users' },
@@ -45,167 +92,91 @@
         { id: 'settings', title: 'Settings', icon: 'settings' },
       ];
 
-      const stats = [
-        { label: 'Total Patients', value: '495' },
-        { label: "Today's Patients", value: '3' },
-        { label: "Today's Collection", value: '₹2,950' },
-        { label: 'Pending Amount', value: '₹24,735' },
-        { label: 'Monthly Income', value: '₹6,720' },
-        { label: 'Total Collection', value: '₹2,78,890' },
-        { label: 'Lab Cases Pending', value: '0' },
-        { label: 'Completed Cases', value: '0' },
-        { label: 'Appointments Today', value: '0' },
-        { label: 'Low Stock', value: '0' },
-      ];
-
-      const todayPatients = [
-        { id: 1, name: 'Nisha', phone: '8077245094', age: 30, amount: '₹600', balance: '₹150' },
-        { id: 2, name: 'Shah Jahan', phone: '9897588692', age: 35, amount: '₹2,000', balance: '' },
-        { id: 3, name: 'Muskan', phone: '7820050319', age: 39, amount: '₹350', balance: '' },
-      ];
-
-      // Open Patient Profile Page
-      const openPatientProfile = (patient) => {
-        setSelectedPatient(patient);
-        setCurrentPage('patient-profile');
-      };
-
       return (
         <div className="min-h-screen pb-10">
-          {/* Top Navbar */}
-          <header className="bg-white border-b px-4 py-2 flex items-center justify-between shadow-sm sticky top-0 z-20">
-            <div className="flex items-center gap-3">
-              {currentPage !== 'dashboard' && (
+          {/* Header */}
+          <header className="bg-white border-b px-4 py-2.5 flex items-center justify-between shadow-sm sticky top-0 z-20">
+            <div className="flex items-center gap-2">
+              {currentView !== 'dashboard' && (
                 <button 
-                  onClick={() => setCurrentPage('dashboard')}
+                  onClick={() => setCurrentView('dashboard')} 
                   className="bg-slate-100 hover:bg-slate-200 text-slate-700 p-1.5 rounded-lg flex items-center gap-1 text-xs font-semibold"
                 >
                   <i data-lucide="arrow-left" className="w-4 h-4"></i> Back
                 </button>
               )}
-              <div className="w-9 h-9 rounded-full bg-pink-500 text-white font-bold flex items-center justify-center text-base">
-                K
-              </div>
+              <div className="w-8 h-8 rounded-full bg-pink-500 text-white font-bold flex items-center justify-center text-sm">K</div>
               <div>
-                <h1 className="font-bold text-pink-600 text-sm leading-tight">Kadir Baksh</h1>
-                <p className="text-[10px] text-gray-500">Dental Lab & Clinic</p>
+                <h1 className="font-bold text-pink-600 text-xs leading-tight">Kadir Baksh</h1>
+                <p className="text-[9px] text-gray-500">Dental Lab & Clinic</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 text-xs overflow-x-auto">
+            <div className="flex items-center gap-2 text-xs">
               <button 
-                onClick={() => setCurrentPage('dashboard')}
-                className={`px-3 py-1.5 rounded-full flex items-center gap-1 font-medium whitespace-nowrap ${
-                  currentPage === 'dashboard' ? 'bg-pink-500 text-white' : 'text-gray-600'
-                }`}
+                onClick={() => setCurrentView('dashboard')} 
+                className={`px-3 py-1 rounded-full flex items-center gap-1 font-medium ${currentView === 'dashboard' ? 'bg-pink-500 text-white' : 'text-gray-600'}`}
               >
                 <i data-lucide="home" className="w-3.5 h-3.5"></i> Home
               </button>
               <button 
-                onClick={() => setCurrentPage('patient-list')}
-                className={`px-3 py-1.5 rounded-full flex items-center gap-1 font-medium whitespace-nowrap ${
-                  currentPage === 'patient-list' ? 'bg-pink-500 text-white' : 'text-gray-600'
-                }`}
-              >
-                <i data-lucide="users" className="w-3.5 h-3.5"></i> Patients
-              </button>
-              <button 
-                onClick={() => setCurrentPage('new-patient')}
-                className="text-gray-600 px-2 py-1.5 font-bold hover:text-pink-600"
+                onClick={() => setCurrentView('new-patient')} 
+                className="bg-pink-50 text-pink-600 font-bold px-2 py-1 rounded-full"
               >
                 + New
               </button>
             </div>
           </header>
 
-          {/* MAIN DASHBOARD PAGE */}
-          {currentPage === 'dashboard' && (
-            <main className="max-w-4xl mx-auto p-4 space-y-6">
-              {/* Banner Section */}
+          {/* VIEW 1: DASHBOARD */}
+          {currentView === 'dashboard' && (
+            <main className="max-w-4xl mx-auto p-4 space-y-5">
               <div className="text-center py-2">
-                <div className="text-3xl font-extrabold text-red-600 tracking-wider mb-1">
-                  KADIR <span className="text-red-700">Bux</span>
-                </div>
-                <div className="text-lg font-bold text-red-600 mb-1">कदीर बख्श डेंटल लैब</div>
-                <div className="text-sm font-semibold text-red-700">قدیر بخش ڈینٹل لیب</div>
-
-                <p className="text-xs text-gray-400 mt-3">Welcome 👋</p>
-                <h2 className="text-xl font-bold text-purple-600">Patient Care, Your Priority</h2>
-                
-                <div className="inline-flex items-center gap-1 text-[11px] bg-emerald-50 text-emerald-600 border border-emerald-200 px-2.5 py-0.5 rounded-full mt-2">
-                  <i data-lucide="sparkles" className="w-3 h-3"></i> AI assistant ready ✨
-                </div>
-
-                {/* Language Switcher */}
-                <div className="flex justify-center gap-2 mt-3">
-                  {['English', 'हिन्दी', 'اردو'].map((item) => (
-                    <button 
-                      key={item}
-                      onClick={() => setLang(item)}
-                      className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        lang === item ? 'bg-pink-500 text-white' : 'bg-gray-100 text-gray-600'
-                      }`}
-                    >
-                      {item}
-                    </button>
-                  ))}
-                </div>
+                <div className="text-2xl font-extrabold text-red-600 mb-0.5">KADIR <span className="text-red-700">Bux</span></div>
+                <div className="text-base font-bold text-red-600">कदीर बख्श डेंटल लैब</div>
+                <div className="text-xs font-semibold text-red-700">قدیر بخش ڈینٹل لیب</div>
+                <p className="text-xs text-gray-400 mt-2">Welcome 👋</p>
+                <h2 className="text-lg font-bold text-purple-600">Patient Care, Your Priority</h2>
               </div>
 
-              {/* Action Grid (All Buttons Clickable) */}
+              {/* Action Buttons Grid */}
               <div className="grid grid-cols-5 gap-2.5">
                 {actionButtons.map((btn) => (
                   <button 
                     key={btn.id} 
-                    onClick={() => setCurrentPage(btn.id)}
-                    className="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center gap-2 hover:shadow-md hover:border-pink-200 transition active:scale-95"
+                    onClick={() => setCurrentView(btn.id)}
+                    className="bg-white p-2.5 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center gap-1.5 hover:shadow-md active:scale-95 transition"
                   >
-                    <div className="w-10 h-10 rounded-full bg-sky-50 flex items-center justify-center text-sky-500">
-                      <i data-lucide={btn.icon} className="w-5 h-5"></i>
+                    <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center text-sky-500">
+                      <i data-lucide={btn.icon} className="w-4 h-4"></i>
                     </div>
-                    <span className="text-[11px] font-medium text-pink-500 text-center">{btn.title}</span>
+                    <span className="text-[10px] font-medium text-pink-500 text-center leading-tight">{btn.title}</span>
                   </button>
                 ))}
               </div>
 
-              {/* Stats Grid */}
-              <div className="grid grid-cols-5 gap-2.5">
-                {stats.map((stat, index) => (
-                  <div key={index} className="bg-white p-2.5 rounded-xl border border-gray-100 shadow-sm text-center">
-                    <p className="text-[10px] text-gray-400 font-medium mb-1 leading-tight">{stat.label}</p>
-                    <p className="text-sm font-bold text-slate-700">{stat.value}</p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Today's Patients List */}
+              {/* Today's Patients Summary List */}
               <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
-                <h3 className="text-sm font-bold text-purple-600 mb-3 flex items-center gap-2">
-                  <span>📊</span> Today's Patients ({todayPatients.length})
+                <h3 className="text-xs font-bold text-purple-600 mb-3 flex items-center justify-between">
+                  <span>📊 Today's Patients ({patients.length})</span>
+                  <button onClick={() => setCurrentView('patient-list')} className="text-pink-500 underline text-[10px]">View All</button>
                 </h3>
 
                 <div className="space-y-2">
-                  {todayPatients.map((patient) => (
-                    <div 
-                      key={patient.id} 
-                      onClick={() => openPatientProfile(patient)}
-                      className="flex items-center justify-between border-b border-gray-100 pb-2 text-xs cursor-pointer hover:bg-slate-50 p-2 rounded-lg transition"
-                    >
+                  {patients.map((p, idx) => (
+                    <div key={idx} className="flex items-center justify-between border-b border-gray-100 pb-2 text-xs">
                       <div className="flex items-center gap-3">
                         <span className="w-5 h-5 rounded-full bg-purple-500 text-white flex items-center justify-center text-[10px] font-bold">
-                          {patient.id}
+                          {idx + 1}
                         </span>
                         <div>
-                          <p className="font-semibold text-slate-800">{patient.name}</p>
-                          <p className="text-[10px] text-gray-400">{patient.phone} • {patient.age} yrs</p>
+                          <p className="font-semibold text-slate-800">{p.name}</p>
+                          <p className="text-[10px] text-gray-400">{p.phone} • {p.age} yrs</p>
                         </div>
                       </div>
-
                       <div className="text-right">
-                        <p className="font-bold text-emerald-500">{patient.amount}</p>
-                        {patient.balance && (
-                          <p className="text-[10px] text-red-500">बाकी {patient.balance}</p>
-                        )}
+                        <p className="font-bold text-emerald-500">₹{p.totalFee}</p>
+                        {Number(p.balance) > 0 && <p className="text-[10px] text-red-500">बाकी ₹{p.balance}</p>}
                       </div>
                     </div>
                   ))}
@@ -214,50 +185,137 @@
             </main>
           )}
 
-          {/* PAGE: PATIENT PROFILE */}
-          {currentPage === 'patient-profile' && selectedPatient && (
-            <main className="max-w-4xl mx-auto p-4 space-y-4">
-              <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
-                <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 rounded-full bg-pink-100 text-pink-600 font-bold text-xl flex items-center justify-center">
-                    {selectedPatient.name.charAt(0)}
-                  </div>
-                  <div>
-                    <h2 className="text-lg font-bold text-slate-800">{selectedPatient.name}</h2>
-                    <p className="text-xs text-slate-500">Phone: {selectedPatient.phone} | Age: {selectedPatient.age}</p>
-                    <p className="text-xs text-emerald-600 font-semibold mt-1">Paid: {selectedPatient.amount}</p>
-                  </div>
-                </div>
-              </div>
+          {/* VIEW 2: NEW PATIENT FORM */}
+          {currentView === 'new-patient' && (
+            <main className="max-w-2xl mx-auto p-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 space-y-3">
+                  <h2 className="text-xs font-bold text-purple-600 flex items-center gap-1.5 border-b pb-2">
+                    <i data-lucide="user" className="w-4 h-4"></i> 1. Patient Photo & Basic Details
+                  </h2>
 
-              <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
-                <h3 className="font-bold text-sm text-slate-700 mb-2">Options & Actions:</h3>
-                <div className="flex gap-2">
-                  <button onClick={() => setCurrentPage('prescription')} className="bg-purple-600 text-white px-3 py-1.5 rounded-lg text-xs">Create Prescription</button>
-                  <button onClick={() => setCurrentPage('billing')} className="bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs">Generate Bill</button>
-                </div>
-              </div>
-            </main>
-          )}
+                  <div className="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-dashed border-slate-300">
+                    <div className="w-16 h-16 rounded-full bg-slate-200 border-2 border-pink-500 overflow-hidden flex items-center justify-center shrink-0">
+                      {formData.patientPhoto ? (
+                        <img src={formData.patientPhoto} alt="Patient" className="w-full h-full object-cover" />
+                      ) : (
+                        <i data-lucide="user" className="w-8 h-8 text-slate-400"></i>
+                      )}
+                    </div>
+                    <div>
+                      <label className="bg-pink-500 hover:bg-pink-600 text-white text-xs font-medium px-3 py-1.5 rounded-lg cursor-pointer inline-flex items-center gap-1">
+                        <i data-lucide="camera" className="w-3.5 h-3.5"></i> Take / Upload Photo
+                        <input type="file" accept="image/*" capture="environment" onChange={handleImageUpload} className="hidden" />
+                      </label>
+                    </div>
+                  </div>
 
-          {/* GENERIC PAGE PLACEHOLDER (New Patient, Billing, Prescriptions, etc.) */}
-          {currentPage !== 'dashboard' && currentPage !== 'patient-profile' && (
-            <main className="max-w-4xl mx-auto p-6 space-y-4 text-center">
-              <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                <div className="w-12 h-12 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center mx-auto mb-3">
-                  <i data-lucide="layers" className="w-6 h-6"></i>
+                  <div className="grid grid-cols-2 gap-3 text-xs">
+                    <div>
+                      <label className="block font-semibold mb-1">Full Name *</label>
+                      <input type="text" required value={formData.fullName} onChange={e => setFormData({...formData, fullName: e.target.value})} placeholder="Patient Name" className="w-full p-2 border rounded-lg outline-none focus:ring-1 focus:ring-pink-500" />
+                    </div>
+                    <div>
+                      <label className="block font-semibold mb-1">Mobile No *</label>
+                      <input type="tel" required value={formData.mobile} onChange={e => setFormData({...formData, mobile: e.target.value})} placeholder="Phone Number" className="w-full p-2 border rounded-lg outline-none focus:ring-1 focus:ring-pink-500" />
+                    </div>
+                    <div>
+                      <label className="block font-semibold mb-1">Age *</label>
+                      <input type="number" required value={formData.age} onChange={e => setFormData({...formData, age: e.target.value})} placeholder="Age" className="w-full p-2 border rounded-lg outline-none focus:ring-1 focus:ring-pink-500" />
+                    </div>
+                    <div>
+                      <label className="block font-semibold mb-1">Gender</label>
+                      <select value={formData.gender} onChange={e => setFormData({...formData, gender: e.target.value})} className="w-full p-2 border rounded-lg bg-white">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
-                <h2 className="text-lg font-bold text-slate-800 capitalize">{currentPage.replace('-', ' ')} Page</h2>
-                <p className="text-xs text-slate-400 mt-1">Yeh page abhi ready hai. Yahan aap apna form ya data UI add kar sakte hain.</p>
-                <button 
-                  onClick={() => setCurrentPage('dashboard')}
-                  className="mt-4 bg-pink-500 text-white text-xs px-4 py-2 rounded-xl font-medium"
-                >
-                  Back to Dashboard
+
+                <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 space-y-3">
+                  <h2 className="text-xs font-bold text-red-600 flex items-center gap-1.5 border-b pb-2">
+                    <i data-lucide="activity" className="w-4 h-4"></i> 2. Medical History (Marj)
+                  </h2>
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    {['Diabetes (Sugar)', 'High BP', 'Heart Problem', 'Drug Allergy'].map((d) => (
+                      <label key={d} className="flex items-center gap-2 p-1.5 border rounded-lg bg-slate-50 cursor-pointer">
+                        <input type="checkbox" checked={formData.medicalHistory.includes(d)} onChange={() => handleCheckboxChange(d)} />
+                        <span>{d}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 space-y-3">
+                  <h2 className="text-xs font-bold text-emerald-600 flex items-center gap-1.5 border-b pb-2">
+                    <i data-lucide="stethoscope" className="w-4 h-4"></i> 3. Treatment & Billing
+                  </h2>
+                  <div className="grid grid-cols-2 gap-3 text-xs">
+                    <div className="col-span-2">
+                      <label className="block font-semibold mb-1">Planned Treatment *</label>
+                      <select required value={formData.treatmentPlan} onChange={e => setFormData({...formData, treatmentPlan: e.target.value})} className="w-full p-2 border rounded-lg bg-white">
+                        <option value="">Select Treatment</option>
+                        <option value="RCT">Root Canal Treatment (RCT)</option>
+                        <option value="Extraction">Tooth Extraction</option>
+                        <option value="Scaling">Scaling / Cleaning</option>
+                        <option value="Crown">Dental Cap / Crown</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block font-semibold mb-1">Total Fee (₹)</label>
+                      <input type="number" value={formData.totalFee} onChange={e => setFormData({...formData, totalFee: e.target.value})} placeholder="2500" className="w-full p-2 border rounded-lg" />
+                    </div>
+                    <div>
+                      <label className="block font-semibold mb-1">Advance Paid (₹)</label>
+                      <input type="number" value={formData.advancePaid} onChange={e => setFormData({...formData, advancePaid: e.target.value})} placeholder="500" className="w-full p-2 border rounded-lg" />
+                    </div>
+                  </div>
+                </div>
+
+                <button type="submit" className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 rounded-2xl shadow-md transition active:scale-95">
+                  Save & Register Patient
                 </button>
+              </form>
+            </main>
+          )}
+
+          {/* VIEW 3: PATIENT LIST */}
+          {currentView === 'patient-list' && (
+            <main className="max-w-4xl mx-auto p-4 space-y-4">
+              <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex justify-between items-center">
+                <h2 className="text-sm font-bold text-slate-800">All Registered Patients</h2>
+                <button onClick={() => setCurrentView('new-patient')} className="bg-pink-500 text-white text-xs px-3 py-1.5 rounded-lg">+ Add New</button>
+              </div>
+
+              <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden text-xs">
+                {patients.map((p, idx) => (
+                  <div key={idx} className="p-3 border-b flex justify-between items-center hover:bg-slate-50">
+                    <div>
+                      <p className="font-bold text-slate-800">{p.name} <span className="text-[10px] text-slate-400">({p.id})</span></p>
+                      <p className="text-[10px] text-slate-500">{p.phone} • {p.treatment}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-bold text-slate-700">₹{p.totalFee}</p>
+                      <p className="text-[10px] text-emerald-600">Advance: ₹{p.advance}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </main>
           )}
+
+          {/* PLACEHOLDER FOR OTHER BUTTONS */}
+          {['daily-folders', 'dental-chart', 'prescription', 'medicines', 'billing', 'reports', 'backup', 'settings'].includes(currentView) && (
+            <main className="max-w-2xl mx-auto p-8 text-center">
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-3">
+                <h2 className="text-base font-bold text-slate-800 capitalize">{currentView.replace('-', ' ')}</h2>
+                <p className="text-xs text-slate-400">Is feature ka screen UI yahan load hoga.</p>
+                <button onClick={() => setCurrentView('dashboard')} className="bg-pink-500 text-white text-xs px-4 py-2 rounded-xl">Back to Dashboard</button>
+              </div>
+            </main>
+          )}
+
         </div>
       );
     }
