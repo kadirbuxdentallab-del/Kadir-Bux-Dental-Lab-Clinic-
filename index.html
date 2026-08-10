@@ -1,1150 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kadir Bux Dental Lab</title>
-
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial,Helvetica,sans-serif;
-}
-
-body{
-    background:#eef4fb;
-    color:#172554;
-}
-
-button,input,select,textarea{
-    font:inherit;
-}
-
-.container{
-    max-width:1500px;
-    margin:auto;
-    padding:20px;
-}
-
-/* HEADER */
-.header{
-    background:white;
-    border-radius:20px;
-    padding:20px 25px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-    margin-bottom:20px;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.logo-icon{
-    width:65px;
-    height:65px;
-    border-radius:50%;
-    background:linear-gradient(135deg,#063f9b,#18b9d7);
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:32px;
-}
-
-.logo h1{
-    color:#073d91;
-    font-size:28px;
-}
-
-.logo p{
-    color:#159bbd;
-    letter-spacing:4px;
-    font-weight:bold;
-}
-
-.header-actions{
-    display:flex;
-    gap:10px;
-}
-
-.btn{
-    border:0;
-    padding:12px 20px;
-    border-radius:12px;
-    cursor:pointer;
-    font-weight:bold;
-    transition:.2s;
-}
-
-.btn:hover{
-    transform:translateY(-2px);
-}
-
-.primary{
-    background:#0750b7;
-    color:white;
-}
-
-.green{
-    background:#16a34a;
-    color:white;
-}
-
-.red{
-    background:#dc2626;
-    color:white;
-}
-
-.light{
-    background:#edf5ff;
-    color:#0750b7;
-}
-
-/* DASHBOARD */
-.dashboard{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-    margin-bottom:20px;
-}
-
-.stat{
-    background:white;
-    padding:20px;
-    border-radius:18px;
-    box-shadow:0 4px 15px rgba(0,0,0,.06);
-}
-
-.stat h3{
-    font-size:14px;
-    color:#64748b;
-    margin-bottom:10px;
-}
-
-.stat strong{
-    font-size:30px;
-    color:#063f9b;
-}
-
-/* GRID */
-.grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-}
-
-.card{
-    background:white;
-    border-radius:20px;
-    padding:22px;
-    box-shadow:0 4px 18px rgba(0,0,0,.07);
-    margin-bottom:20px;
-}
-
-.card-title{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:20px;
-    border-bottom:1px solid #e5e7eb;
-    padding-bottom:15px;
-}
-
-.card-title h2{
-    color:#073d91;
-    font-size:20px;
-}
-
-.form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-}
-
-.form-group{
-    display:flex;
-    flex-direction:column;
-    gap:7px;
-}
-
-.form-group.full{
-    grid-column:1/-1;
-}
-
-label{
-    font-size:13px;
-    font-weight:bold;
-    color:#475569;
-}
-
-input,select,textarea{
-    width:100%;
-    border:1px solid #d8e1ec;
-    border-radius:10px;
-    padding:12px;
-    outline:none;
-    background:#fbfdff;
-}
-
-input:focus,select:focus,textarea:focus{
-    border-color:#0b63ce;
-    box-shadow:0 0 0 3px rgba(11,99,206,.08);
-}
-
-textarea{
-    min-height:80px;
-    resize:vertical;
-}
-
-/* PATIENT PROFILE */
-.profile{
-    display:grid;
-    grid-template-columns:180px 1fr;
-    gap:20px;
-}
-
-.patient-photo{
-    width:180px;
-    height:210px;
-    border-radius:18px;
-    overflow:hidden;
-    background:#e8f1fa;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border:3px solid #0a62c9;
-}
-
-.patient-photo img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.photo-placeholder{
-    text-align:center;
-    color:#64748b;
-    padding:15px;
-}
-
-.info-list{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-}
-
-.info{
-    background:#f6faff;
-    border-radius:10px;
-    padding:12px;
-}
-
-.info span{
-    display:block;
-    color:#64748b;
-    font-size:12px;
-    margin-bottom:5px;
-}
-
-.info strong{
-    color:#172554;
-}
-
-/* DENTAL CHART */
-.teeth{
-    display:flex;
-    flex-wrap:wrap;
-    gap:7px;
-    justify-content:center;
-    margin-top:20px;
-}
-
-.tooth{
-    width:38px;
-    height:55px;
-    border:2px solid #b9c5d5;
-    border-radius:45% 45% 50% 50%;
-    background:white;
-    cursor:pointer;
-    display:flex;
-    align-items:flex-end;
-    justify-content:center;
-    padding-bottom:5px;
-    font-size:11px;
-    color:#475569;
-}
-
-.tooth:hover{
-    border-color:#0750b7;
-}
-
-.tooth.work{
-    background:#0874df;
-    border-color:#0750b7;
-    color:white;
-}
-
-.chart-row{
-    margin-bottom:15px;
-}
-
-.chart-row-title{
-    text-align:center;
-    color:#64748b;
-    font-size:13px;
-}
-
-/* FEE */
-.fee-box{
-    background:linear-gradient(135deg,#063d91,#075ed1);
-    color:white;
-    border-radius:18px;
-    padding:22px;
-}
-
-.fee-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-}
-
-.fee-item{
-    border-right:1px solid rgba(255,255,255,.4);
-    padding:10px;
-}
-
-.fee-item:last-child{
-    border:0;
-}
-
-.fee-item span{
-    display:block;
-    font-size:13px;
-    opacity:.85;
-}
-
-.fee-item strong{
-    font-size:28px;
-}
-
-/* TABLE */
-.table-wrap{
-    overflow-x:auto;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    min-width:800px;
-}
-
-th{
-    background:#073d91;
-    color:white;
-    padding:13px;
-    text-align:left;
-    font-size:13px;
-}
-
-td{
-    padding:13px;
-    border-bottom:1px solid #e5e7eb;
-    font-size:13px;
-}
-
-.status{
-    background:#dcfce7;
-    color:#15803d;
-    border:1px solid #86efac;
-    padding:5px 10px;
-    border-radius:20px;
-    display:inline-block;
-}
-
-/* MODAL */
-.modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.55);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:1000;
-    padding:20px;
-}
-
-.modal.active{
-    display:flex;
-}
-
-.modal-box{
-    background:white;
-    width:100%;
-    max-width:850px;
-    max-height:90vh;
-    overflow:auto;
-    border-radius:20px;
-    padding:25px;
-}
-
-.modal-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.close{
-    background:#fee2e2;
-    color:#dc2626;
-    border:0;
-    width:38px;
-    height:38px;
-    border-radius:50%;
-    cursor:pointer;
-    font-size:20px;
-}
-
-/* FOOTER */
-.footer{
-    background:#063d91;
-    color:white;
-    border-radius:20px;
-    padding:20px;
-    text-align:center;
-    margin-top:10px;
-}
-
-/* MOBILE */
-@media(max-width:1000px){
-    .dashboard{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .grid{
-        grid-template-columns:1fr;
-    }
-}
-
-@media(max-width:650px){
-    .container{
-        padding:10px;
-    }
-
-    .header{
-        flex-direction:column;
-        gap:15px;
-        text-align:center;
-    }
-
-    .dashboard{
-        grid-template-columns:1fr;
-    }
-
-    .form-grid,
-    .info-list{
-        grid-template-columns:1fr;
-    }
-
-    .profile{
-        grid-template-columns:1fr;
-    }
-
-    .patient-photo{
-        margin:auto;
-    }
-
-    .fee-grid{
-        grid-template-columns:1fr;
-    }
-
-    .fee-item{
-        border-right:0;
-        border-bottom:1px solid rgba(255,255,255,.3);
-    }
-
-    .header-actions{
-        flex-wrap:wrap;
-        justify-content:center;
-    }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kadir Bux Dental Lab & Clinic</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- React & Babel CDNs -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
+<body class="bg-slate-50 text-slate-800">
+  <div id="root"></div>
 
-<body>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
 
-<div class="container">
+    function Dashboard() {
+      const [lang, setLang] = useState('English');
 
-<!-- HEADER -->
-<header class="header">
-    <div class="logo">
-        <div class="logo-icon">🦷</div>
-        <div>
-            <h1>KADIR BUX</h1>
-            <p>DENTAL LAB</p>
-        </div>
-    </div>
+      useEffect(() => {
+        if (window.lucide) {
+          window.lucide.createIcons();
+        }
+      }, []);
 
-    <div class="header-actions">
-        <button class="btn primary" onclick="openPatientModal()">
-            + New Patient
-        </button>
+      const actionButtons = [
+        { title: 'New Patient', icon: 'user-plus' },
+        { title: 'Patient List', icon: 'users' },
+        { title: 'Daily Folders', icon: 'calendar' },
+        { title: 'Dental Chart', icon: 'activity' },
+        { title: 'Prescription', icon: 'file-text' },
+        { title: 'Medicines', icon: 'pill' },
+        { title: 'Billing', icon: 'credit-card' },
+        { title: 'Reports', icon: 'bar-chart-2' },
+        { title: 'Backup', icon: 'database' },
+        { title: 'Settings', icon: 'settings' },
+      ];
 
-        <button class="btn light" onclick="window.print()">
-            🖨 Print
-        </button>
-    </div>
-</header>
+      const stats = [
+        { label: 'Total Patients', value: '495' },
+        { label: "Today's Patients", value: '3' },
+        { label: "Today's Collection", value: '₹2,950' },
+        { label: 'Pending Amount', value: '₹24,735' },
+        { label: 'Monthly Income', value: '₹6,720' },
+        { label: 'Total Collection', value: '₹2,78,890' },
+        { label: 'Lab Cases Pending', value: '0' },
+        { label: 'Completed Cases', value: '0' },
+        { label: 'Appointments Today', value: '0' },
+        { label: 'Low Stock', value: '0' },
+      ];
 
+      const todayPatients = [
+        { id: 1, name: 'Nisha', phone: '8077245094', age: 30, amount: '₹600', balance: '₹150' },
+        { id: 2, name: 'Shah Jahan', phone: '9897588692', age: 35, amount: '₹2,000', balance: '' },
+        { id: 3, name: 'Muskan', phone: '7820050319', age: 39, amount: '₹350', balance: '' },
+      ];
 
-<!-- DASHBOARD STATS -->
-<section class="dashboard">
+      return (
+        <div className="min-h-screen pb-10">
+          {/* Top Navbar */}
+          <header className="bg-white border-b px-4 py-2 flex items-center justify-between shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-pink-500 text-white font-bold flex items-center justify-center text-lg">
+                K
+              </div>
+              <div>
+                <h1 className="font-bold text-pink-600 text-sm leading-tight">Kadir Baksh</h1>
+                <p className="text-xs text-gray-500">Dental Lab</p>
+              </div>
+            </div>
 
-    <div class="stat">
-        <h3>TOTAL PATIENTS</h3>
-        <strong id="totalPatients">1</strong>
-    </div>
+            <div className="flex items-center gap-2 text-xs overflow-x-auto">
+              <button className="bg-pink-500 text-white px-3 py-1.5 rounded-full flex items-center gap-1 font-medium whitespace-nowrap">
+                <i data-lucide="home" className="w-3.5 h-3.5"></i> Home
+              </button>
+              <button className="text-gray-600 px-3 py-1.5 flex items-center gap-1 whitespace-nowrap">
+                <i data-lucide="users" className="w-3.5 h-3.5"></i> Patients
+              </button>
+              <button className="text-gray-600 px-2 py-1.5 font-bold">+ New</button>
+              <button className="text-gray-600 p-1.5"><i data-lucide="settings" className="w-4 h-4"></i></button>
+              <button className="border px-2 py-1 rounded text-purple-600 flex items-center gap-1 whitespace-nowrap">
+                <i data-lucide="globe" className="w-3.5 h-3.5"></i> Urdu
+              </button>
+              <button className="text-gray-500 p-1.5"><i data-lucide="log-out" className="w-4 h-4"></i></button>
+            </div>
+          </header>
 
-    <div class="stat">
-        <h3>TOTAL CASES</h3>
-        <strong id="totalCases">3</strong>
-    </div>
+          <main className="max-w-4xl mx-auto p-4 space-y-6">
+            {/* Banner Section */}
+            <div className="text-center py-2">
+              <div className="text-3xl font-extrabold text-red-600 tracking-wider mb-1">
+                KADIR <span className="text-red-700">Bux</span>
+              </div>
+              <div className="text-lg font-bold text-red-600 mb-1">
+                कदीर बख्श डेंटल लैब
+              </div>
+              <div className="text-sm font-semibold text-red-700">
+                قدیر بخش ڈینٹل لیب
+              </div>
 
-    <div class="stat">
-        <h3>TOTAL COLLECTION</h3>
-        <strong id="totalCollection">₹260</strong>
-    </div>
+              <p className="text-xs text-gray-400 mt-3">Welcome 👋</p>
+              <h2 className="text-xl font-bold text-purple-600">Patient Care, Your Priority</h2>
+              <p className="text-xs text-gray-400">Patient Care, Your Priority</p>
+              
+              <div className="inline-flex items-center gap-1 text-[11px] bg-emerald-50 text-emerald-600 border border-emerald-200 px-2.5 py-0.5 rounded-full mt-2">
+                <i data-lucide="sparkles" className="w-3 h-3"></i> AI assistant ready ✨
+              </div>
 
-    <div class="stat">
-        <h3>PENDING AMOUNT</h3>
-        <strong id="pendingAmount">₹0</strong>
-    </div>
+              {/* Language Switcher */}
+              <div className="flex justify-center gap-2 mt-4">
+                {['English', 'हिन्दी', 'اردو'].map((item) => (
+                  <button 
+                    key={item}
+                    onClick={() => setLang(item)}
+                    className={`px-3 py-1 rounded-full text-xs font-medium ${
+                      lang === item ? 'bg-pink-500 text-white' : 'bg-gray-100 text-gray-600'
+                    }`}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-</section>
+            {/* Action Grid */}
+            <div className="grid grid-cols-5 gap-2.5">
+              {actionButtons.map((btn, index) => (
+                <button 
+                  key={index} 
+                  className="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center gap-2 hover:shadow-md transition"
+                >
+                  <div className="w-10 h-10 rounded-full bg-sky-50 flex items-center justify-center text-sky-500">
+                    <i data-lucide={btn.icon} className="w-5 h-5"></i>
+                  </div>
+                  <span className="text-[11px] font-medium text-pink-500 text-center">{btn.title}</span>
+                </button>
+              ))}
+            </div>
 
-
-<!-- MAIN GRID -->
-<div class="grid">
-
-<!-- LEFT COLUMN -->
-<div>
-
-<!-- PATIENT PROFILE -->
-<div class="card">
-
-    <div class="card-title">
-        <h2>👤 Patient Profile</h2>
-
-        <div>
-            <button class="btn light" onclick="openPatientModal()">
-                ✏ Edit
-            </button>
-
-            <button class="btn red" onclick="deletePatient()">
-                🗑 Delete
-            </button>
-        </div>
-    </div>
-
-    <div class="profile">
-
-        <div>
-            <div class="patient-photo" id="patientPhoto">
-                <div class="photo-placeholder">
-                    🧑<br>
-                    Patient Photo
+            {/* Stats Grid */}
+            <div className="grid grid-cols-5 gap-2.5">
+              {stats.map((stat, index) => (
+                <div key={index} className="bg-white p-2.5 rounded-xl border border-gray-100 shadow-sm text-center">
+                  <p className="text-[10px] text-gray-400 font-medium mb-1 leading-tight">{stat.label}</p>
+                  <p className="text-sm font-bold text-slate-700">{stat.value}</p>
                 </div>
+              ))}
             </div>
 
-            <input
-                type="file"
-                id="photoInput"
-                accept="image/*"
-                style="margin-top:10px"
-                onchange="uploadPhoto(event)"
-            >
-        </div>
+            {/* Today's Patients List */}
+            <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+              <h3 className="text-sm font-bold text-purple-600 mb-3 flex items-center gap-2">
+                <span>📊</span> Today's Patients ({todayPatients.length})
+              </h3>
 
-        <div class="info-list">
+              <div className="space-y-3">
+                {todayPatients.map((patient) => (
+                  <div key={patient.id} className="flex items-center justify-between border-b border-gray-100 pb-2 text-xs">
+                    <div className="flex items-center gap-3">
+                      <span className="w-5 h-5 rounded-full bg-purple-500 text-white flex items-center justify-center text-[10px] font-bold">
+                        {patient.id}
+                      </span>
+                      <div>
+                        <p className="font-semibold text-slate-800">{patient.name}</p>
+                        <p className="text-[10px] text-gray-400">{patient.phone} • {patient.age}</p>
+                      </div>
+                    </div>
 
-            <div class="info">
-                <span>Name</span>
-                <strong id="displayName">Ravi</strong>
+                    <div className="text-right">
+                      <p className="font-bold text-emerald-500">{patient.amount}</p>
+                      {patient.balance && (
+                        <p className="text-[10px] text-red-500">बाकी {patient.balance}</p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-
-            <div class="info">
-                <span>Patient ID</span>
-                <strong id="displayId">PID-000123</strong>
-            </div>
-
-            <div class="info">
-                <span>हिंदी नाम</span>
-                <strong id="displayHindi">रवि</strong>
-            </div>
-
-            <div class="info">
-                <span>اردو نام</span>
-                <strong id="displayUrdu">راوی</strong>
-            </div>
-
-            <div class="info">
-                <span>Age / Gender</span>
-                <strong id="displayAge">32 Years / Male</strong>
-            </div>
-
-            <div class="info">
-                <span>Blood Group</span>
-                <strong id="displayBlood">O+</strong>
-            </div>
-
-            <div class="info">
-                <span>Mobile Number</span>
-                <strong id="displayMobile">7983126706</strong>
-            </div>
-
-            <div class="info">
-                <span>Address</span>
-                <strong id="displayAddress">Saifni, India</strong>
-            </div>
-
-            <div class="info">
-                <span>Registered On</span>
-                <strong id="displayRegistered">
-                    9/8/2026 - 10:37 am
-                </strong>
-            </div>
-
+          </main>
         </div>
-    </div>
-</div>
-
-
-<!-- PATIENT CASE -->
-<div class="card">
-
-    <div class="card-title">
-        <h2>🦷 Dental Case Details</h2>
-
-        <button class="btn primary" onclick="openCaseModal()">
-            + Add Case
-        </button>
-    </div>
-
-    <div class="form-grid">
-
-        <div class="info">
-            <span>Case ID</span>
-            <strong id="caseId">CASE-000123</strong>
-        </div>
-
-        <div class="info">
-            <span>Tooth Number</span>
-            <strong id="caseTooth">11, 12, 13</strong>
-        </div>
-
-        <div class="info">
-            <span>Tooth Type</span>
-            <strong id="caseType">Anterior</strong>
-        </div>
-
-        <div class="info">
-            <span>Treatment</span>
-            <strong id="caseTreatment">PFM Crown</strong>
-        </div>
-
-        <div class="info">
-            <span>Material</span>
-            <strong id="caseMaterial">Metal Ceramic</strong>
-        </div>
-
-        <div class="info">
-            <span>Shade</span>
-            <strong id="caseShade">A2</strong>
-        </div>
-
-        <div class="info">
-            <span>Lab Work</span>
-            <strong id="caseLab">Crown</strong>
-        </div>
-
-        <div class="info">
-            <span>Status</span>
-            <strong class="status">Completed</strong>
-        </div>
-
-        <div class="info">
-            <span>Received Date</span>
-            <strong id="caseReceived">9/8/2026</strong>
-        </div>
-
-        <div class="info">
-            <span>Delivery Date</span>
-            <strong id="caseDelivery">11/8/2026</strong>
-        </div>
-
-        <div class="info">
-            <span>Dentist Instructions</span>
-            <strong id="caseInstructions">Follow Proper Margins</strong>
-        </div>
-
-        <div class="info">
-            <span>Special Notes</span>
-            <strong id="caseNotes">Handle with care</strong>
-        </div>
-
-    </div>
-</div>
-
-</div>
-
-
-<!-- RIGHT COLUMN -->
-<div>
-
-<!-- FEE -->
-<div class="card">
-
-    <div class="card-title">
-        <h2>💰 Payment Details</h2>
-    </div>
-
-    <div class="fee-box">
-
-        <div class="fee-grid">
-
-            <div class="fee-item">
-                <span>TOTAL FEE</span>
-                <strong id="totalFee">₹60</strong>
-            </div>
-
-            <div class="fee-item">
-                <span>PAID AMOUNT</span>
-                <strong id="paidAmount">₹60</strong>
-            </div>
-
-            <div class="fee-item">
-                <span>REMAINING AMOUNT</span>
-                <strong id="remainingAmount">₹0</strong>
-            </div>
-
-        </div>
-
-        <br>
-
-        <button class="btn green" onclick="openPaymentModal()">
-            + Add Payment
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- DENTAL CHART -->
-<div class="card">
-
-    <div class="card-title">
-        <h2>🦷 Dental Chart</h2>
-    </div>
-
-    <div class="chart-row">
-        <div class="chart-row-title">
-            Upper Teeth
-        </div>
-
-        <div class="teeth" id="upperTeeth"></div>
-    </div>
-
-    <div class="chart-row">
-        <div class="chart-row-title">
-            Lower Teeth
-        </div>
-
-        <div class="teeth" id="lowerTeeth"></div>
-    </div>
-
-    <br>
-
-    <p style="text-align:center;color:#64748b;font-size:13px;">
-        Click on a tooth to mark it as Work Done.
-    </p>
-
-</div>
-
-</div>
-</div>
-
-
-<!-- HISTORY -->
-<div class="card">
-
-    <div class="card-title">
-        <h2>📋 Recent Entries / History</h2>
-
-        <button class="btn primary" onclick="openCaseModal()">
-            + New Entry
-        </button>
-    </div>
-
-    <div class="table-wrap">
-
-        <table>
-
-            <thead>
-                <tr>
-                    <th>DATE</th>
-                    <th>CASE / ENTRY</th>
-                    <th>TOOTH</th>
-                    <th>TREATMENT</th>
-                    <th>STATUS</th>
-                    <th>FEE</th>
-                    <th>PAID</th>
-                    <th>REMAINING</th>
-                    <th>ACTION</th>
-                </tr>
-            </thead>
-
-            <tbody id="historyTable">
-
-                <tr>
-                    <td>9/8/2026</td>
-                    <td>CASE-000123</td>
-                    <td>11, 12, 13</td>
-                    <td>PFM Crown</td>
-                    <td><span class="status">Completed</span></td>
-                    <td>₹60</td>
-                    <td>₹60</td>
-                    <td>₹0</td>
-                    <td>
-                        <button class="btn light"
-                        onclick="alert('Case document opened')">
-                        📄
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>5/8/2026</td>
-                    <td>CASE-000122</td>
-                    <td>21</td>
-                    <td>RCT</td>
-                    <td><span class="status">Completed</span></td>
-                    <td>₹120</td>
-                    <td>₹120</td>
-                    <td>₹0</td>
-                    <td>
-                        <button class="btn light">📄</button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>1/8/2026</td>
-                    <td>CASE-000121</td>
-                    <td>36</td>
-                    <td>Filling</td>
-                    <td><span class="status">Completed</span></td>
-                    <td>₹80</td>
-                    <td>₹80</td>
-                    <td>₹0</td>
-                    <td>
-                        <button class="btn light">📄</button>
-                    </td>
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-</div>
-
-
-<footer class="footer">
-    🦷 Kadir Bux Dental Lab
-    <br>
-    <small>Patient Care, Your Priority • Caring for Healthy Smiles</small>
-</footer>
-
-</div>
-
-
-<!-- PATIENT MODAL -->
-<div class="modal" id="patientModal">
-
-<div class="modal-box">
-
-    <div class="modal-header">
-        <h2>Patient Information</h2>
-
-        <button class="close"
-        onclick="closeModal('patientModal')">
-        ×
-        </button>
-    </div>
-
-    <div class="form-grid">
-
-        <div class="form-group">
-            <label>Patient Name</label>
-            <input id="inputName" value="Ravi">
-        </div>
-
-        <div class="form-group">
-            <label>Patient ID</label>
-            <input id="inputId" value="PID-000123">
-        </div>
-
-        <div class="form-group">
-            <label>Hindi Name</label>
-            <input id="inputHindi" value="रवि">
-        </div>
-
-        <div class="form-group">
-            <label>Urdu Name</label>
-            <input id="inputUrdu" value="راوی">
-        </div>
-
-        <div class="form-group">
-            <label>Age</label>
-            <input id="inputAge" type="number" value="32">
-        </div>
-
-        <div class="form-group">
-            <label>Gender</label>
-            <select id="inputGender">
-                <option>Male</option>
-                <option>Female</option>
-                <option>Other</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Blood Group</label>
-            <select id="inputBlood">
-                <option>O+</option>
-                <option>O-</option>
-                <option>A+</option>
-                <option>A-</option>
-                <option>B+</option>
-                <option>B-</option>
-                <option>AB+</option>
-                <option>AB-</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Mobile Number</label>
-            <input id="inputMobile" value="7983126706">
-        </div>
-
-        <div class="form-group full">
-            <label>Address</label>
-            <textarea id="inputAddress">Saifni, India</textarea>
-        </div>
-
-    </div>
-
-    <br>
-
-    <button class="btn primary" onclick="savePatient()">
-        Save Patient
-    </button>
-
-</div>
-</div>
-
-
-<!-- CASE MODAL -->
-<div class="modal" id="caseModal">
-
-<div class="modal-box">
-
-    <div class="modal-header">
-        <h2>Dental Case</h2>
-
-        <button class="close"
-        onclick="closeModal('caseModal')">
-        ×
-        </button>
-    </div>
-
-    <div class="form-grid">
-
-        <div class="form-group">
-            <label>Case ID</label>
-            <input id="inputCaseId" value="CASE-000123">
-        </div>
-
-        <div class="form-group">
-            <label>Tooth Number</label>
-            <input id="inputCaseTooth" value="11, 12, 13">
-        </div>
-
-        <div class="form-group">
-            <label>Tooth Type</label>
-            <input id="inputCaseType" value="Anterior">
-        </div>
-
-        <div class="form-group">
-            <label>Treatment</label>
-            <select id="inputTreatment">
-                <option>PFM Crown</option>
-                <option>Zirconia Crown</option>
-                <option>Metal Crown</option>
-                <option>RCT</option>
-                <option>Filling</option>
-                <option>Denture</option>
-                <option>Bridge</option>
-                <option>Other</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Material</label>
-            <input id="inputMaterial" value="Metal Ceramic">
-        </div>
-
-        <div class="form-group">
-            <label>Shade</label>
-            <input id="inputShade" value="A2">
-        </div>
-
-        <div class="form-group">
-            <label>Lab Work</label>
-            <input id="inputLab" value="Crown">
-        </div>
-
-        <div class="form-group">
-            <label>Status</label>
-            <select id="inputStatus">
-                <option>Completed</option>
-                <option>In Progress</option>
-                <option>Pending</option>
-                <option>Missing</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Received Date</label>
-            <input id="inputReceived" type="date">
-        </div>
-
-        <div class="form-group">
-            <label>Delivery Date</label>
-            <input id="inputDelivery" type="date">
-        </div>
-
-        <div class="form-group full">
-            <label>Dentist Instructions</label>
-            <textarea id="inputInstructions">Follow Proper Margins</textarea>
-        </div>
-
-        <div class="form-group full">
-            <label>Special Notes</label>
-            <textarea id="inputNotes">Handle with care</textarea>
-        </div>
-
-        <div class="form-group">
-            <label>Total Fee ₹</label>
-            <input id="inputFee" type="number" value="60">
-        </div>
-
-    </div>
-
-    <br>
-
-    <button class="btn primary" onclick="saveCase()">
-        Save Case
-    </button>
-
-</div>
-</div>
-
-
-<!-- PAYMENT MODAL -->
-<div class="modal" id="paymentModal">
-
-<div class="modal-box" style="max-width:500px">
-
-    <div class="modal-header">
-        <h2>Add Payment</h2>
-
-        <button class="close"
-        onclick="closeModal('paymentModal')">
-        ×
-        </button>
-    </div>
-
-    <div class="form-group">
-        <label>Payment Amount ₹</label>
-        <input id="paymentInput" type="number" min="0">
-    </div>
-
-    <br>
-
-    <button class="btn green" onclick="addPayment()">
-        Save Payment
-    </button>
-
-</div>
-</div>
-
-
-<script>
-
-/* ==============================
-   PATIENT DATA
-================================ */
-
-let patient = {
-    name:"Ravi",
-    id:"PID-000123",
-    hindi:"रवि",
-    urdu:"راوی",
-    age:32,
-    gender:"Male",
-    blood:"O+",
-    mobile:"7983126706",
-    address:"Saifni, India"
-};
-
-let totalFee = 60;
-let paidAmount = 60;
-
-
-/* ==============================
-   MODAL
-================================ */
-
-function openPatientModal(){
-    document.getElementById("patientModal")
-    .classList.add("active");
-}
-
-function openCaseModal(){
-    document.getElementById("caseModal")
-    .classList.add("active");
-}
-
-function openPaymentModal(){
-    document.getElementById("paymentModal")
-    .classList.add("active");
-}
-
-function closeModal(id){
-    document.getElementById(id)
-    .classList.remove("active");
-}
-
-
-/* ==============================
-   SAVE PATIENT
-================================ */
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<Dashboard />);
+  </script>
+</body>
+</html>
