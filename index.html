@@ -1,193 +1,1124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kadir Bux Dental Lab & Clinic</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- React & Babel CDNs -->
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <!-- Lucide Icons CDN -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-<body class="bg-slate-50 text-slate-800">
-  <div id="root"></div>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script type="text/babel">
-    const { useState, useEffect } = React;
+<title>Kadir Baksh Dental Lab</title>
 
-    function Dashboard() {
-      const [lang, setLang] = useState('English');
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial, sans-serif;
+}
 
-      useEffect(() => {
-        if (window.lucide) {
-          window.lucide.createIcons();
-        }
-      }, []);
+body{
+    background:#f7f5ff;
+    color:#29243a;
+}
 
-      const actionButtons = [
-        { title: 'New Patient', icon: 'user-plus' },
-        { title: 'Patient List', icon: 'users' },
-        { title: 'Daily Folders', icon: 'calendar' },
-        { title: 'Dental Chart', icon: 'activity' },
-        { title: 'Prescription', icon: 'file-text' },
-        { title: 'Medicines', icon: 'pill' },
-        { title: 'Billing', icon: 'credit-card' },
-        { title: 'Reports', icon: 'bar-chart-2' },
-        { title: 'Backup', icon: 'database' },
-        { title: 'Settings', icon: 'settings' },
-      ];
+header{
+    height:70px;
+    background:linear-gradient(90deg,#fff,#f5eaff);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    border-bottom:1px solid #eee;
+}
 
-      const stats = [
-        { label: 'Total Patients', value: '495' },
-        { label: "Today's Patients", value: '3' },
-        { label: "Today's Collection", value: '₹2,950' },
-        { label: 'Pending Amount', value: '₹24,735' },
-        { label: 'Monthly Income', value: '₹6,720' },
-        { label: 'Total Collection', value: '₹2,78,890' },
-        { label: 'Lab Cases Pending', value: '0' },
-        { label: 'Completed Cases', value: '0' },
-        { label: 'Appointments Today', value: '0' },
-        { label: 'Low Stock', value: '0' },
-      ];
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
 
-      const todayPatients = [
-        { id: 1, name: 'Nisha', phone: '8077245094', age: 30, amount: '₹600', balance: '₹150' },
-        { id: 2, name: 'Shah Jahan', phone: '9897588692', age: 35, amount: '₹2,000', balance: '' },
-        { id: 3, name: 'Muskan', phone: '7820050319', age: 39, amount: '₹350', balance: '' },
-      ];
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#ff13b8,#713cff);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+}
 
-      return (
-        <div className="min-h-screen pb-10">
-          {/* Top Navbar */}
-          <header className="bg-white border-b px-4 py-2 flex items-center justify-between shadow-sm">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-pink-500 text-white font-bold flex items-center justify-center text-lg">
-                K
-              </div>
-              <div>
-                <h1 className="font-bold text-pink-600 text-sm leading-tight">Kadir Baksh</h1>
-                <p className="text-xs text-gray-500">Dental Lab</p>
-              </div>
-            </div>
+.logo h3{
+    font-size:15px;
+}
 
-            <div className="flex items-center gap-2 text-xs overflow-x-auto">
-              <button className="bg-pink-500 text-white px-3 py-1.5 rounded-full flex items-center gap-1 font-medium whitespace-nowrap">
-                <i data-lucide="home" className="w-3.5 h-3.5"></i> Home
-              </button>
-              <button className="text-gray-600 px-3 py-1.5 flex items-center gap-1 whitespace-nowrap">
-                <i data-lucide="users" className="w-3.5 h-3.5"></i> Patients
-              </button>
-              <button className="text-gray-600 px-2 py-1.5 font-bold">+ New</button>
-              <button className="text-gray-600 p-1.5"><i data-lucide="settings" className="w-4 h-4"></i></button>
-              <button className="border px-2 py-1 rounded text-purple-600 flex items-center gap-1 whitespace-nowrap">
-                <i data-lucide="globe" className="w-3.5 h-3.5"></i> Urdu
-              </button>
-              <button className="text-gray-500 p-1.5"><i data-lucide="log-out" className="w-4 h-4"></i></button>
-            </div>
-          </header>
+.logo small{
+    color:#777;
+}
 
-          <main className="max-w-4xl mx-auto p-4 space-y-6">
-            {/* Banner Section */}
-            <div className="text-center py-2">
-              <div className="text-3xl font-extrabold text-red-600 tracking-wider mb-1">
-                KADIR <span className="text-red-700">Bux</span>
-              </div>
-              <div className="text-lg font-bold text-red-600 mb-1">
-                कदीर बख्श डेंटल लैब
-              </div>
-              <div className="text-sm font-semibold text-red-700">
-                قدیر بخش ڈینٹل لیب
-              </div>
+nav{
+    display:flex;
+    gap:20px;
+    align-items:center;
+}
 
-              <p className="text-xs text-gray-400 mt-3">Welcome 👋</p>
-              <h2 className="text-xl font-bold text-purple-600">Patient Care, Your Priority</h2>
-              <p className="text-xs text-gray-400">Patient Care, Your Priority</p>
-              
-              <div className="inline-flex items-center gap-1 text-[11px] bg-emerald-50 text-emerald-600 border border-emerald-200 px-2.5 py-0.5 rounded-full mt-2">
-                <i data-lucide="sparkles" className="w-3 h-3"></i> AI assistant ready ✨
-              </div>
+nav button{
+    border:0;
+    background:transparent;
+    cursor:pointer;
+    color:#4e475d;
+    padding:8px 12px;
+}
 
-              {/* Language Switcher */}
-              <div className="flex justify-center gap-2 mt-4">
-                {['English', 'हिन्दी', 'اردو'].map((item) => (
-                  <button 
-                    key={item}
-                    onClick={() => setLang(item)}
-                    className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      lang === item ? 'bg-pink-500 text-white' : 'bg-gray-100 text-gray-600'
-                    }`}
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
-            </div>
+nav button:hover{
+    color:#a000ff;
+}
 
-            {/* Action Grid */}
-            <div className="grid grid-cols-5 gap-2.5">
-              {actionButtons.map((btn, index) => (
-                <button 
-                  key={index} 
-                  className="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center gap-2 hover:shadow-md transition"
-                >
-                  <div className="w-10 h-10 rounded-full bg-sky-50 flex items-center justify-center text-sky-500">
-                    <i data-lucide={btn.icon} className="w-5 h-5"></i>
-                  </div>
-                  <span className="text-[11px] font-medium text-pink-500 text-center">{btn.title}</span>
-                </button>
-              ))}
-            </div>
+.container{
+    max-width:1250px;
+    margin:auto;
+    padding:25px;
+}
 
-            {/* Stats Grid */}
-            <div className="grid grid-cols-5 gap-2.5">
-              {stats.map((stat, index) => (
-                <div key={index} className="bg-white p-2.5 rounded-xl border border-gray-100 shadow-sm text-center">
-                  <p className="text-[10px] text-gray-400 font-medium mb-1 leading-tight">{stat.label}</p>
-                  <p className="text-sm font-bold text-slate-700">{stat.value}</p>
-                </div>
-              ))}
-            </div>
+.page-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
 
-            {/* Today's Patients List */}
-            <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
-              <h3 className="text-sm font-bold text-purple-600 mb-3 flex items-center gap-2">
-                <span>📊</span> Today's Patients ({todayPatients.length})
-              </h3>
+.page-title h2{
+    font-size:22px;
+}
 
-              <div className="space-y-3">
-                {todayPatients.map((patient) => (
-                  <div key={patient.id} className="flex items-center justify-between border-b border-gray-100 pb-2 text-xs">
-                    <div className="flex items-center gap-3">
-                      <span className="w-5 h-5 rounded-full bg-purple-500 text-white flex items-center justify-center text-[10px] font-bold">
-                        {patient.id}
-                      </span>
-                      <div>
-                        <p className="font-semibold text-slate-800">{patient.name}</p>
-                        <p className="text-[10px] text-gray-400">{patient.phone} • {patient.age}</p>
-                      </div>
-                    </div>
+.page-title span{
+    color:#a000ff;
+}
 
-                    <div className="text-right">
-                      <p className="font-bold text-emerald-500">{patient.amount}</p>
-                      {patient.balance && (
-                        <p className="text-[10px] text-red-500">बाकी {patient.balance}</p>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </main>
-        </div>
-      );
+.primary{
+    background:linear-gradient(90deg,#f500b8,#8a16f5);
+    color:white;
+    border:none;
+    border-radius:9px;
+    padding:12px 20px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.search-box{
+    background:white;
+    padding:15px;
+    border-radius:14px;
+    box-shadow:0 5px 20px #ddd8ee;
+    margin-bottom:20px;
+}
+
+.search-box input{
+    width:100%;
+    border:1px solid #ddd;
+    padding:13px;
+    border-radius:8px;
+    outline:none;
+}
+
+.patient-list{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:18px;
+}
+
+.patient-card{
+    background:white;
+    border-radius:15px;
+    padding:18px;
+    box-shadow:0 5px 20px #ddd8ee;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.patient-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 25px #d5ccef;
+}
+
+.patient-top{
+    display:flex;
+    gap:13px;
+    align-items:center;
+}
+
+.avatar{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#e85cff,#7d28ff);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.patient-info h3{
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+.patient-info p{
+    color:#777;
+    font-size:13px;
+}
+
+.details{
+    margin-top:15px;
+    border-top:1px solid #eee;
+    padding-top:12px;
+}
+
+.details p{
+    margin:7px 0;
+    font-size:13px;
+}
+
+.actions{
+    display:flex;
+    gap:7px;
+    margin-top:15px;
+}
+
+.actions button{
+    flex:1;
+    padding:8px;
+    border-radius:7px;
+    border:1px solid #ddd;
+    background:white;
+    cursor:pointer;
+}
+
+.profile{
+    display:none;
+}
+
+.profile-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.back{
+    background:white;
+    border:1px solid #ddd;
+    padding:10px 16px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.profile-box{
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 5px 25px #ded8ef;
+}
+
+.profile-top{
+    display:grid;
+    grid-template-columns:1fr 260px;
+    gap:25px;
+}
+
+.patient-data{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+}
+
+.data-row{
+    padding:12px;
+    border-bottom:1px solid #eee;
+    font-size:13px;
+}
+
+.data-row span{
+    color:#888;
+    display:block;
+    margin-bottom:5px;
+}
+
+.big-avatar{
+    height:230px;
+    border-radius:20px;
+    background:#faf5ff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:100px;
+    color:#b14aff;
+}
+
+.contact-buttons{
+    display:flex;
+    gap:8px;
+    margin-top:15px;
+}
+
+.contact-buttons button{
+    flex:1;
+    padding:10px;
+    border:0;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.call{
+    background:#e8fff5;
+    color:#008a57;
+}
+
+.sms{
+    background:#eef7ff;
+    color:#1976d2;
+}
+
+.whatsapp{
+    background:#e9fff0;
+    color:#159447;
+}
+
+.money-box{
+    margin-top:20px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    border-radius:15px;
+    overflow:hidden;
+    background:linear-gradient(90deg,#5423bc,#b61bdb,#087dcc);
+    color:white;
+}
+
+.money{
+    padding:18px;
+    border-right:1px solid #ffffff55;
+}
+
+.money small{
+    display:block;
+    opacity:.8;
+    margin-bottom:7px;
+}
+
+.money strong{
+    font-size:20px;
+}
+
+.section{
+    margin-top:25px;
+}
+
+.section h3{
+    margin-bottom:12px;
+}
+
+.dental-chart{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    overflow:auto;
+}
+
+.teeth{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    min-width:700px;
+}
+
+.tooth{
+    width:32px;
+    height:42px;
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:5px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:10px;
+    cursor:pointer;
+}
+
+.tooth.selected{
+    border:2px solid #a300ff;
+    box-shadow:0 0 8px #c770ff;
+}
+
+.jaw-title{
+    text-align:center;
+    margin:15px;
+    color:#777;
+}
+
+.treatment{
+    background:white;
+    border-radius:15px;
+    padding:18px;
+    box-shadow:0 4px 18px #e1dcef;
+}
+
+.treatment-head{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
+}
+
+.status{
+    background:#ffc928;
+    color:white;
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+.treatment p{
+    margin:8px 0;
+    font-size:13px;
+}
+
+.form-box{
+    display:none;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 25px #ddd8ee;
+    margin-bottom:20px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.form-group label{
+    display:block;
+    font-size:13px;
+    margin-bottom:6px;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:11px;
+    border:1px solid #ddd;
+    border-radius:8px;
+}
+
+.form-buttons{
+    margin-top:20px;
+    display:flex;
+    gap:10px;
+}
+
+.form-buttons button{
+    padding:11px 20px;
+    border-radius:8px;
+    border:0;
+    cursor:pointer;
+}
+
+.save{
+    background:#9d00ff;
+    color:white;
+}
+
+.cancel{
+    background:#eee;
+}
+
+@media(max-width:700px){
+
+    header{
+        padding:0 12px;
+        height:60px;
     }
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<Dashboard />);
-  </script>
+    nav button{
+        padding:5px;
+        font-size:11px;
+    }
+
+    .container{
+        padding:15px;
+    }
+
+    .profile-top{
+        grid-template-columns:1fr;
+    }
+
+    .big-avatar{
+        height:180px;
+    }
+
+    .patient-data{
+        grid-template-columns:1fr;
+    }
+
+    .money-box{
+        grid-template-columns:1fr;
+    }
+
+    .money{
+        border-right:0;
+        border-bottom:1px solid #ffffff44;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+    <div class="logo-icon">K</div>
+    <div>
+        <h3>Kadir Baksh</h3>
+        <small>Dental Lab</small>
+    </div>
+</div>
+
+<nav>
+    <button onclick="showPatients()">⌂ Home</button>
+    <button onclick="showPatients()">👥 Patients</button>
+    <button onclick="showForm()">＋ New</button>
+</nav>
+
+</header>
+
+
+<!-- ================= PATIENT LIST ================= -->
+
+<div id="patientPage" class="container">
+
+<div class="page-title">
+    <div>
+        <h2>PATIENT <span>LIST</span></h2>
+        <small>Patient Care, Your Priority</small>
+    </div>
+
+    <button class="primary" onclick="showForm()">
+        + Add New Patient
+    </button>
+</div>
+
+
+<div id="formBox" class="form-box">
+
+<h3>Add New Patient</h3>
+
+<br>
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Patient Name</label>
+<input id="name" placeholder="Enter patient name">
+</div>
+
+<div class="form-group">
+<label>Age</label>
+<input id="age" type="number" placeholder="Age">
+</div>
+
+<div class="form-group">
+<label>Gender</label>
+<select id="gender">
+<option>Female</option>
+<option>Male</option>
+<option>Other</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Mobile Number</label>
+<input id="mobile" placeholder="Mobile number">
+</div>
+
+<div class="form-group">
+<label>Address</label>
+<input id="address" placeholder="Address">
+</div>
+
+<div class="form-group">
+<label>Total Fee</label>
+<input id="fee" type="number" placeholder="Total fee">
+</div>
+
+</div>
+
+<div class="form-buttons">
+
+<button class="save" onclick="addPatient()">
+Save Patient
+</button>
+
+<button class="cancel" onclick="hideForm()">
+Cancel
+</button>
+
+</div>
+
+</div>
+
+
+<div class="search-box">
+
+<input
+type="text"
+id="search"
+placeholder="🔎 Search patient by name or mobile..."
+oninput="searchPatients()">
+
+</div>
+
+
+<div id="patientList" class="patient-list"></div>
+
+</div>
+
+
+
+<!-- ================= PATIENT PROFILE ================= -->
+
+<div id="profilePage" class="container profile">
+
+<div class="profile-header">
+
+<button class="back" onclick="showPatients()">
+← Back to Patients
+</button>
+
+<button class="primary" onclick="showForm()">
++ New Patient
+</button>
+
+</div>
+
+
+<div class="profile-box">
+
+<h2>PATIENT <span style="color:#a000ff">PROFILE</span></h2>
+
+<br>
+
+
+<div class="profile-top">
+
+<div>
+
+<div id="patientData" class="patient-data"></div>
+
+<div class="contact-buttons">
+
+<button class="call" onclick="callPatient()">☎ Call</button>
+
+<button class="sms" onclick="smsPatient()">✉ SMS</button>
+
+<button class="whatsapp" onclick="whatsappPatient()">◉ WhatsApp</button>
+
+</div>
+
+</div>
+
+
+<div>
+
+<div class="big-avatar">
+    👤
+</div>
+
+</div>
+
+</div>
+
+
+<!-- MONEY -->
+
+<div class="money-box">
+
+<div class="money">
+<small>TOTAL FEE</small>
+<strong id="profileFee">₹0</strong>
+</div>
+
+<div class="money">
+<small>PAID AMOUNT</small>
+<strong id="profilePaid">₹0</strong>
+</div>
+
+<div class="money">
+<small>REMAINING AMOUNT</small>
+<strong id="profileRemaining">₹0</strong>
+</div>
+
+</div>
+
+
+<!-- DENTAL CHART -->
+
+<div class="section">
+
+<h3>🦷 Dental Chart</h3>
+
+<div class="dental-chart">
+
+<div class="jaw-title">UPPER JAW</div>
+
+<div id="upperTeeth" class="teeth"></div>
+
+<div class="jaw-title">LOWER JAW</div>
+
+<div id="lowerTeeth" class="teeth"></div>
+
+</div>
+
+</div>
+
+
+<!-- TREATMENT -->
+
+<div class="section">
+
+<h3>Treatment History</h3>
+
+<div class="treatment">
+
+<div class="treatment-head">
+
+<strong>🦷 Dental Caries</strong>
+
+<span class="status">Pending</span>
+
+</div>
+
+<p>📅 Monday · 10 Aug 2026 · 14:36</p>
+
+<hr><br>
+
+<p><strong>This Visit's Teeth:</strong> #28</p>
+
+<p><strong>Pain Level:</strong> Moderate</p>
+
+<p>💊 Acloc 150mg 3 — Qty: 5</p>
+
+<p>💊 Allnox 250mg 3 — Qty: 5</p>
+
+<p>💊 Betnesol 0.5mg 3 — Qty: 5</p>
+
+<p>💊 CPM 4mg 3 — Qty: 5</p>
+
+<p>💊 Ibgesic Plus 725mg 2.5 — Qty: 5</p>
+
+<hr><br>
+
+<p><strong>Plan:</strong> Kochli nikali, Dalton ki safai ki</p>
+
+<br>
+
+<p>
+Fee: ₹<span id="historyFee">0</span>
+&nbsp;&nbsp;
+<span style="color:green">
+Given: ₹<span id="historyPaid">0</span>
+</span>
+&nbsp;&nbsp;
+<span style="color:#e6a500">
+Remaining: ₹<span id="historyRemaining">0</span>
+</span>
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+let patients = JSON.parse(localStorage.getItem("dentalPatients")) || [
+
+{
+id:1,
+name:"Nisha",
+age:"30",
+gender:"Female",
+mobile:"8077245094",
+address:"Saifni",
+fee:750,
+paid:600
+}
+
+];
+
+let currentPatient = null;
+
+
+/* ================= PATIENT LIST ================= */
+
+function renderPatients(data=patients){
+
+const list=document.getElementById("patientList");
+
+list.innerHTML="";
+
+if(data.length===0){
+
+list.innerHTML=`
+<div style="grid-column:1/-1;text-align:center;padding:40px">
+<h3>No Patient Found</h3>
+<p>Add a new patient to get started.</p>
+</div>`;
+
+return;
+
+}
+
+
+data.forEach(patient=>{
+
+let first=patient.name.charAt(0).toUpperCase();
+
+let remaining=patient.fee-patient.paid;
+
+list.innerHTML+=`
+
+<div class="patient-card" onclick="openProfile(${patient.id})">
+
+<div class="patient-top">
+
+<div class="avatar">${first}</div>
+
+<div class="patient-info">
+
+<h3>${patient.name}</h3>
+
+<p>${patient.age} Years · ${patient.gender}</p>
+
+</div>
+
+</div>
+
+<div class="details">
+
+<p>📱 ${patient.mobile}</p>
+
+<p>📍 ${patient.address}</p>
+
+<p>💰 Fee: ₹${patient.fee}</p>
+
+<p>🟢 Paid: ₹${patient.paid}
+&nbsp;&nbsp;
+<span style="color:#e6a500">
+Remaining: ₹${remaining}
+</span>
+</p>
+
+</div>
+
+<div class="actions">
+
+<button onclick="event.stopPropagation();callNumber('${patient.mobile}')">
+☎ Call
+</button>
+
+<button onclick="event.stopPropagation();openProfile(${patient.id})">
+👤 Profile
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* ================= SEARCH ================= */
+
+function searchPatients(){
+
+let value=document
+.getElementById("search")
+.value
+.toLowerCase();
+
+let filtered=patients.filter(p=>
+p.name.toLowerCase().includes(value) ||
+p.mobile.includes(value)
+);
+
+renderPatients(filtered);
+
+}
+
+
+/* ================= ADD PATIENT ================= */
+
+function addPatient(){
+
+let name=document.getElementById("name").value.trim();
+
+if(!name){
+
+alert("Please enter patient name");
+
+return;
+
+}
+
+let patient={
+
+id:Date.now(),
+
+name:name,
+
+age:document.getElementById("age").value,
+
+gender:document.getElementById("gender").value,
+
+mobile:document.getElementById("mobile").value,
+
+address:document.getElementById("address").value,
+
+fee:Number(document.getElementById("fee").value)||0,
+
+paid:0
+
+};
+
+
+patients.push(patient);
+
+localStorage.setItem(
+"dentalPatients",
+JSON.stringify(patients)
+);
+
+clearForm();
+
+hideForm();
+
+renderPatients();
+
+alert("Patient added successfully!");
+
+}
+
+
+/* ================= PROFILE ================= */
+
+function openProfile(id){
+
+currentPatient=patients.find(p=>p.id===id);
+
+if(!currentPatient)return;
+
+document.getElementById("patientPage")
+.style.display="none";
+
+document.getElementById("profilePage")
+.style.display="block";
+
+let p=currentPatient;
+
+let remaining=p.fee-p.paid;
+
+document.getElementById("patientData").innerHTML=`
+
+<div class="data-row">
+<span>Patient Name</span>
+<strong>${p.name}</strong>
+</div>
+
+<div class="data-row">
+<span>Patient ID</span>
+<strong>#${p.id}</strong>
+</div>
+
+<div class="data-row">
+<span>Age / Female</span>
+<strong>${p.age} Years · ${p.gender}</strong>
+</div>
+
+<div class="data-row">
+<span>Mobile Number</span>
+<strong>${p.mobile}</strong>
+</div>
+
+<div class="data-row">
+<span>Address</span>
+<strong>${p.address}</strong>
+</div>
+
+<div class="data-row">
+<span>Registered On</span>
+<strong>10/8/2026</strong>
+</div>
+
+`;
+
+document.getElementById("profileFee").innerText="₹"+p.fee;
+
+document.getElementById("profilePaid").innerText="₹"+p.paid;
+
+document.getElementById("profileRemaining")
+.innerText="₹"+remaining;
+
+document.getElementById("historyFee").innerText=p.fee;
+
+document.getElementById("historyPaid").innerText=p.paid;
+
+document.getElementById("historyRemaining")
+.innerText=remaining;
+
+createDentalChart();
+
+window.scrollTo(0,0);
+
+}
+
+
+/* ================= DENTAL CHART ================= */
+
+function createDentalChart(){
+
+let upper=document.getElementById("upperTeeth");
+
+let lower=document.getElementById("lowerTeeth");
+
+upper.innerHTML="";
+lower.innerHTML="";
+
+for(let i=1;i<=16;i++){
+
+upper.innerHTML+=`
+<div class="tooth" onclick="selectTooth(this)">
+${i}
+</div>
+`;
+
+}
+
+for(let i=17;i<=32;i++){
+
+lower.innerHTML+=`
+<div class="tooth" onclick="selectTooth(this)">
+${i}
+</div>
+`;
+
+}
+
+}
+
+
+function selectTooth(element){
+
+element.classList.toggle("selected");
+
+}
+
+
+/* ================= CONTACT ================= */
+
+function callNumber(number){
+
+window.location.href="tel:"+number;
+
+}
+
+function callPatient(){
+
+if(currentPatient)
+callNumber(currentPatient.mobile);
+
+}
+
+function smsPatient(){
+
+if(currentPatient)
+window.location.href="sms:"+currentPatient.mobile;
+
+}
+
+function whatsappPatient(){
+
+if(currentPatient){
+
+window.open(
+"https://wa.me/91"+currentPatient.mobile,
+"_blank"
+);
+
+}
+
+}
+
+
+/* ================= FORM ================= */
+
+function showForm(){
+
+document.getElementById("formBox")
+.style.display="block";
+
+window.scrollTo(0,0);
+
+}
+
+function hideForm(){
+
+document.getElementById("formBox")
+.style.display="none";
+
+}
+
+function clearForm(){
+
+document.querySelectorAll(
+"#formBox input"
+).forEach(input=>input.value="");
+
+}
+
+
+/* ================= PAGES ================= */
+
+function showPatients(){
+
+document.getElementById("profilePage")
+.style.display="none";
+
+document.getElementById("patientPage")
+.style.display="block";
+
+renderPatients();
+
+}
+
+
+/* START */
+
+renderPatients();
+
+</script>
+
 </body>
 </html>
