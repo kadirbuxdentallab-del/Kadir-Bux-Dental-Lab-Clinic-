@@ -1,104 +1,115 @@
 import React, { useState } from 'react';
+import PatientForm from './PatientForm';
+import LabOrderForm from './LabOrderForm';
+import InvoiceForm from './InvoiceForm';
 
-export default function InvoiceForm() {
-  const [invoice, setInvoice] = useState({
-    patientName: '',
-    phone: '',
-    service: '',
-    totalAmount: '',
-    discount: '0',
-    paidAmount: '',
-  });
-
-  const grandTotal = Number(invoice.totalAmount) - Number(invoice.discount);
-  const dueAmount = grandTotal - Number(invoice.paidAmount);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert(`Invoice generated for ${invoice.patientName}! Due: ₹${dueAmount}`);
-  };
+export default function Dashboard() {
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'new-patient' | 'lab-order' | 'invoice'>('dashboard');
 
   return (
-    <div className="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md my-6 border border-slate-200">
-      <h2 className="text-xl font-bold text-slate-800 mb-4 border-b pb-2">
-        Create Patient Billing Invoice
-      </h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="font-sans bg-[#f4f7f6] min-h-screen p-[15px]">
+      {/* Header */}
+      <header className="bg-[#1e3a8a] text-white p-[15px] rounded-[8px] flex justify-between items-center shadow-sm">
         <div>
-          <label className="block text-sm font-semibold text-gray-700">Patient Name</label>
-          <input
-            type="text"
-            required
-            className="w-full p-2 border rounded-md mt-1"
-            value={invoice.patientName}
-            onChange={(e) => setInvoice({ ...invoice, patientName: e.target.value })}
-            placeholder="e.g. Rahul Sharma"
-          />
+          <h2 className="m-0 text-[18px] font-bold">Kadir Bux Dental Lab & Clinic</h2>
+          <p className="m-0 text-xs text-blue-200 mt-1">Practice & Lab Management System</p>
         </div>
+        <span className="bg-[#22c55e] text-white px-[10px] py-[4px] rounded-[12px] text-[12px] font-medium">
+          Active
+        </span>
+      </header>
 
-        <div>
-          <label className="block text-sm font-semibold text-gray-700">Treatment Details</label>
-          <input
-            type="text"
-            className="w-full p-2 border rounded-md mt-1"
-            value={invoice.service}
-            onChange={(e) => setInvoice({ ...invoice, service: e.target.value })}
-            placeholder="Root Canal Treatment + Zirconia Crown"
-          />
-        </div>
-
-        <div className="grid grid-cols-3 gap-3">
-          <div>
-            <label className="block text-xs font-semibold text-gray-700">Total Charges (₹)</label>
-            <input
-              type="number"
-              className="w-full p-2 border rounded-md mt-1"
-              value={invoice.totalAmount}
-              onChange={(e) => setInvoice({ ...invoice, totalAmount: e.target.value })}
-              placeholder="5000"
-            />
-          </div>
-          <div>
-            <label className="block text-xs font-semibold text-gray-700">Discount (₹)</label>
-            <input
-              type="number"
-              className="w-full p-2 border rounded-md mt-1"
-              value={invoice.discount}
-              onChange={(e) => setInvoice({ ...invoice, discount: e.target.value })}
-              placeholder="0"
-            />
-          </div>
-          <div>
-            <label className="block text-xs font-semibold text-gray-700">Paid Amount (₹)</label>
-            <input
-              type="number"
-              className="w-full p-2 border rounded-md mt-1"
-              value={invoice.paidAmount}
-              onChange={(e) => setInvoice({ ...invoice, paidAmount: e.target.value })}
-              placeholder="3000"
-            />
-          </div>
-        </div>
-
-        {/* Calculation Summary */}
-        <div className="bg-slate-50 p-3 rounded-md text-sm border space-y-1">
-          <div className="flex justify-between">
-            <span>Grand Total:</span>
-            <span className="font-bold">₹{grandTotal > 0 ? grandTotal : 0}</span>
-          </div>
-          <div className="flex justify-between text-red-600">
-            <span>Remaining Balance / Due:</span>
-            <span className="font-bold">₹{dueAmount > 0 ? dueAmount : 0}</span>
-          </div>
-        </div>
-
+      {/* Navigation Menu */}
+      <div className="flex gap-2 my-4 flex-wrap">
         <button
-          type="submit"
-          className="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 rounded-md transition mt-4"
+          onClick={() => setActiveTab('dashboard')}
+          className={`px-4 py-2 rounded-md text-sm font-semibold transition ${
+            activeTab === 'dashboard'
+              ? 'bg-blue-900 text-white'
+              : 'bg-white text-slate-700 border border-slate-300'
+          }`}
         >
-          Generate & Print Invoice
+          Dashboard View
         </button>
-      </form>
+        <button
+          onClick={() => setActiveTab('new-patient')}
+          className={`px-4 py-2 rounded-md text-sm font-semibold transition ${
+            activeTab === 'new-patient'
+              ? 'bg-blue-900 text-white'
+              : 'bg-white text-slate-700 border border-slate-300'
+          }`}
+        >
+          + New Patient
+        </button>
+        <button
+          onClick={() => setActiveTab('lab-order')}
+          className={`px-4 py-2 rounded-md text-sm font-semibold transition ${
+            activeTab === 'lab-order'
+              ? 'bg-teal-800 text-white'
+              : 'bg-white text-slate-700 border border-slate-300'
+          }`}
+        >
+          + Add Lab Order
+        </button>
+        <button
+          onClick={() => setActiveTab('invoice')}
+          className={`px-4 py-2 rounded-md text-sm font-semibold transition ${
+            activeTab === 'invoice'
+              ? 'bg-slate-800 text-white'
+              : 'bg-white text-slate-700 border border-slate-300'
+          }`}
+        >
+          Create Invoice
+        </button>
+      </div>
+
+      {/* Main Content Areas */}
+      {activeTab === 'dashboard' && (
+        <>
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-[10px] mt-[15px]">
+            <div className="bg-white p-[15px] rounded-[8px] shadow-[0_2px_4px_rgba(0,0,0,0.05)] border border-slate-100">
+              <p className="m-0 text-[#666] text-[12px] font-medium">Total Patients</p>
+              <h3 className="mt-[5px] mb-0 text-[#1e3a8a] text-xl font-bold">0</h3>
+            </div>
+            <div className="bg-white p-[15px] rounded-[8px] shadow-[0_2px_4px_rgba(0,0,0,0.05)] border border-slate-100">
+              <p className="m-0 text-[#666] text-[12px] font-medium">Today Lab Jobs</p>
+              <h3 className="mt-[5px] mb-0 text-[#1e3a8a] text-xl font-bold">0</h3>
+            </div>
+            <div className="bg-white p-[15px] rounded-[8px] shadow-[0_2px_4px_rgba(0,0,0,0.05)] border border-slate-100">
+              <p className="m-0 text-[#666] text-[12px] font-medium">Pending Payments</p>
+              <h3 className="mt-[5px] mb-0 text-[#ef4444] text-xl font-bold">₹0</h3>
+            </div>
+          </div>
+
+          <div className="bg-white mt-[15px] p-[15px] rounded-[8px] shadow-[0_2px_4px_rgba(0,0,0,0.05)] border border-slate-100">
+            <h3 className="mt-0 text-[15px] text-[#333] font-bold mb-[12px]">Quick Actions</h3>
+            <div className="flex gap-[10px] flex-wrap">
+              <button
+                onClick={() => setActiveTab('new-patient')}
+                className="bg-[#2563eb] hover:bg-blue-700 text-white border-none py-[10px] px-[15px] rounded-[5px] cursor-pointer text-sm font-medium transition"
+              >
+                + New Patient
+              </button>
+              <button
+                onClick={() => setActiveTab('lab-order')}
+                className="bg-[#0f766e] hover:bg-teal-800 text-white border-none py-[10px] px-[15px] rounded-[5px] cursor-pointer text-sm font-medium transition"
+              >
+                + Add Lab Order
+              </button>
+              <button
+                onClick={() => setActiveTab('invoice')}
+                className="bg-[#475569] hover:bg-slate-700 text-white border-none py-[10px] px-[15px] rounded-[5px] cursor-pointer text-sm font-medium transition"
+              >
+                Create Invoice
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+
+      {activeTab === 'new-patient' && <PatientForm />}
+      {activeTab === 'lab-order' && <LabOrderForm />}
+      {activeTab === 'invoice' && <InvoiceForm />}
     </div>
   );
 }
