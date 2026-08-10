@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kadir Bux Dental Lab & Clinic</title>
+  <title>Kadir Bux Dental Lab & Clinic - Patient Profile</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- React & Babel CDNs -->
@@ -12,316 +12,326 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .bg-cyan-header { background-color: #008eb0; }
+    .text-cyan-brand { color: #008eb0; }
+    .border-cyan-brand { border-color: #008eb0; }
+    .bg-cyan-card { background-color: #00a8cc; }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-100 text-slate-800 font-sans">
   <div id="root"></div>
 
   <script type="text/babel">
     const { useState, useEffect } = React;
 
-    function MainApp() {
-      // Navigation State (Default Screen = 'dashboard')
-      const [currentView, setCurrentView] = useState('dashboard');
+    function PatientProfileView() {
       const [lang, setLang] = useState('English');
-
-      // Sample Patient Data
-      const [patients, setPatients] = useState([
-        { id: 'P-101', name: 'Nisha', phone: '8077245094', age: '30', treatment: 'RCT', totalFee: '600', advance: '450', balance: '150' },
-        { id: 'P-102', name: 'Shah Jahan', phone: '9897588692', age: '35', treatment: 'Scaling', totalFee: '2000', advance: '2000', balance: '0' },
-        { id: 'P-103', name: 'Muskan', phone: '7820050319', age: '39', treatment: 'Extraction', totalFee: '350', advance: '350', balance: '0' }
-      ]);
-
-      // New Patient Form State
-      const [formData, setFormData] = useState({
-        fullName: '', age: '', gender: 'Male', mobile: '', address: '',
-        patientPhoto: null, medicalHistory: [], chiefComplaint: '',
-        treatmentPlan: '', totalFee: '', advancePaid: '', paymentMode: 'Cash'
-      });
 
       useEffect(() => {
         if (window.lucide) { window.lucide.createIcons(); }
-      }, [currentView, formData.patientPhoto]);
+      }, [lang]);
 
-      // Photo Upload Handler
-      const handleImageUpload = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onloadend = () => setFormData({ ...formData, patientPhoto: reader.result });
-          reader.readAsDataURL(file);
-        }
+      // Sample Patient Data matching image
+      const patient = {
+        fullName: "Mohd Kasim",
+        patientId: "KBD-M5927FG6-8FP",
+        hindiName: "मोहमद कासिम",
+        urduName: "محمد قاسم",
+        ageGender: "0 years / Male",
+        mobile: "--",
+        address: "Kasim Bilari",
+        registeredOn: "01/08/2026, 11:44",
+        totalFee: "₹1,000",
+        paidAmount: "₹0",
+        remainingAmount: "₹1,000",
+        caseId: "KBD-M5927FG6-8FP",
+        medicines: "Glass Ionomer Cement, Permanent Filling Material",
+        lastVisit: "01/08/2026",
+        receivedDate: "01/08/2026"
       };
 
-      // Medical History Checkbox
-      const handleCheckboxChange = (disease) => {
-        const updated = formData.medicalHistory.includes(disease)
-          ? formData.medicalHistory.filter(item => item !== disease)
-          : [...formData.medicalHistory, disease];
-        setFormData({ ...formData, medicalHistory: updated });
-      };
-
-      // Form Submit (Add Patient to List)
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        const newPatient = {
-          id: 'P-' + Math.floor(1000 + Math.random() * 9000),
-          name: formData.fullName,
-          phone: formData.mobile,
-          age: formData.age,
-          treatment: formData.treatmentPlan || 'Consultation',
-          totalFee: formData.totalFee || '0',
-          advance: formData.advancePaid || '0',
-          balance: (Number(formData.totalFee || 0) - Number(formData.advancePaid || 0)).toString()
-        };
-
-        setPatients([newPatient, ...patients]);
-        alert('Patient Registered Successfully!');
-        setCurrentView('dashboard'); // Return to Dashboard
-      };
-
-      const actionButtons = [
-        { id: 'new-patient', title: 'New Patient', icon: 'user-plus' },
-        { id: 'patient-list', title: 'Patient List', icon: 'users' },
-        { id: 'daily-folders', title: 'Daily Folders', icon: 'calendar' },
-        { id: 'dental-chart', title: 'Dental Chart', icon: 'activity' },
-        { id: 'prescription', title: 'Prescription', icon: 'file-text' },
-        { id: 'medicines', title: 'Medicines', icon: 'pill' },
-        { id: 'billing', title: 'Billing', icon: 'credit-card' },
-        { id: 'reports', title: 'Reports', icon: 'bar-chart-2' },
-        { id: 'backup', title: 'Backup', icon: 'database' },
-        { id: 'settings', title: 'Settings', icon: 'settings' },
-      ];
+      // Teeth Numbers Grid matching chart in image
+      const upperTeeth = [18, 17, 16, 15, 14, 13, 12, 11, 21, 22, 23, 24, 25, 26, 27, 28];
+      const lowerTeeth = [48, 47, 46, 45, 44, 43, 42, 41, 31, 32, 33, 34, 35, 36, 37, 38];
 
       return (
-        <div className="min-h-screen pb-10">
-          {/* Header */}
-          <header className="bg-white border-b px-4 py-2.5 flex items-center justify-between shadow-sm sticky top-0 z-20">
-            <div className="flex items-center gap-2">
-              {currentView !== 'dashboard' && (
-                <button 
-                  onClick={() => setCurrentView('dashboard')} 
-                  className="bg-slate-100 hover:bg-slate-200 text-slate-700 p-1.5 rounded-lg flex items-center gap-1 text-xs font-semibold"
-                >
-                  <i data-lucide="arrow-left" className="w-4 h-4"></i> Back
-                </button>
-              )}
-              <div className="w-8 h-8 rounded-full bg-pink-500 text-white font-bold flex items-center justify-center text-sm">K</div>
+        <div className="max-w-5xl mx-auto bg-white min-h-screen shadow-md flex flex-col justify-between">
+          
+          <div>
+            {/* Top Cyan Bar */}
+            <header className="bg-cyan-header text-white px-4 py-2 flex items-center justify-between">
               <div>
-                <h1 className="font-bold text-pink-600 text-xs leading-tight">Kadir Baksh</h1>
-                <p className="text-[9px] text-gray-500">Dental Lab & Clinic</p>
+                <h1 className="font-bold text-sm leading-tight">Kadir Bux Dental Lab & Clinic</h1>
+                <p className="text-[10px] opacity-80">Professional Dental Care Management</p>
               </div>
-            </div>
-
-            <div className="flex items-center gap-2 text-xs">
-              <button 
-                onClick={() => setCurrentView('dashboard')} 
-                className={`px-3 py-1 rounded-full flex items-center gap-1 font-medium ${currentView === 'dashboard' ? 'bg-pink-500 text-white' : 'text-gray-600'}`}
-              >
-                <i data-lucide="home" className="w-3.5 h-3.5"></i> Home
-              </button>
-              <button 
-                onClick={() => setCurrentView('new-patient')} 
-                className="bg-pink-50 text-pink-600 font-bold px-2 py-1 rounded-full"
-              >
-                + New
-              </button>
-            </div>
-          </header>
-
-          {/* VIEW 1: DASHBOARD */}
-          {currentView === 'dashboard' && (
-            <main className="max-w-4xl mx-auto p-4 space-y-5">
-              <div className="text-center py-2">
-                <div className="text-2xl font-extrabold text-red-600 mb-0.5">KADIR <span className="text-red-700">Bux</span></div>
-                <div className="text-base font-bold text-red-600">कदीर बख्श डेंटल लैब</div>
-                <div className="text-xs font-semibold text-red-700">قدیر بخش ڈینٹل لیب</div>
-                <p className="text-xs text-gray-400 mt-2">Welcome 👋</p>
-                <h2 className="text-lg font-bold text-purple-600">Patient Care, Your Priority</h2>
-              </div>
-
-              {/* Action Buttons Grid */}
-              <div className="grid grid-cols-5 gap-2.5">
-                {actionButtons.map((btn) => (
+              <div className="flex gap-1 text-[11px]">
+                {['English', 'हिंदी', 'اردو'].map((item) => (
                   <button 
-                    key={btn.id} 
-                    onClick={() => setCurrentView(btn.id)}
-                    className="bg-white p-2.5 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center gap-1.5 hover:shadow-md active:scale-95 transition"
+                    key={item}
+                    onClick={() => setLang(item)}
+                    className={`px-2 py-0.5 rounded ${lang === item ? 'bg-white text-cyan-800 font-bold' : 'opacity-80 hover:opacity-100'}`}
                   >
-                    <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center text-sky-500">
-                      <i data-lucide={btn.icon} className="w-4 h-4"></i>
-                    </div>
-                    <span className="text-[10px] font-medium text-pink-500 text-center leading-tight">{btn.title}</span>
+                    {item}
                   </button>
                 ))}
               </div>
+            </header>
 
-              {/* Today's Patients Summary List */}
-              <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
-                <h3 className="text-xs font-bold text-purple-600 mb-3 flex items-center justify-between">
-                  <span>📊 Today's Patients ({patients.length})</span>
-                  <button onClick={() => setCurrentView('patient-list')} className="text-pink-500 underline text-[10px]">View All</button>
-                </h3>
+            <main className="p-4 space-y-4">
+              
+              {/* Back Button */}
+              <button className="text-xs text-slate-500 flex items-center gap-1 font-medium hover:text-slate-800">
+                <i data-lucide="arrow-left" className="w-3.5 h-3.5"></i> Back
+              </button>
 
-                <div className="space-y-2">
-                  {patients.map((p, idx) => (
-                    <div key={idx} className="flex items-center justify-between border-b border-gray-100 pb-2 text-xs">
-                      <div className="flex items-center gap-3">
-                        <span className="w-5 h-5 rounded-full bg-purple-500 text-white flex items-center justify-center text-[10px] font-bold">
-                          {idx + 1}
-                        </span>
-                        <div>
-                          <p className="font-semibold text-slate-800">{p.name}</p>
-                          <p className="text-[10px] text-gray-400">{p.phone} • {p.age} yrs</p>
-                        </div>
+              {/* Brand Header & Round Profile Photo */}
+              <div className="flex items-center justify-between border-b pb-3">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded bg-cyan-header text-white flex items-center justify-center font-bold text-xs">
+                    KBD
+                  </div>
+                  <div>
+                    <h2 className="font-bold text-slate-700 text-sm tracking-wide">KADIR BUX</h2>
+                    <p className="text-[10px] text-cyan-brand font-semibold leading-none">DENTAL LAB</p>
+                    <h3 className="font-extrabold text-cyan-brand text-base tracking-wider mt-0.5">
+                      PATIENT <span className="text-sky-400">PROFILE</span>
+                    </h3>
+                    <p className="text-[9px] text-slate-400">Patient Care, Your Priority</p>
+                  </div>
+                </div>
+
+                {/* Profile Photo Circular Frame */}
+                <div className="w-20 h-20 rounded-full border-4 border-cyan-brand overflow-hidden shadow-sm flex items-center justify-center bg-slate-100">
+                  <i data-lucide="user" className="w-10 h-10 text-slate-400"></i>
+                </div>
+              </div>
+
+              {/* Patient Info List & Quick Action Buttons Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                {/* Left Info Table */}
+                <div className="bg-slate-50/70 p-3 rounded-lg border border-slate-200 text-xs space-y-2">
+                  <div className="flex justify-between items-center py-0.5 border-b border-slate-100">
+                    <span className="text-slate-400 flex items-center gap-1.5"><i data-lucide="user" className="w-3.5 h-3.5"></i> Full Name</span>
+                    <span className="font-bold text-slate-800">{patient.fullName}</span>
+                  </div>
+                  <div className="flex justify-between items-center py-0.5 border-b border-slate-100">
+                    <span className="text-slate-400 flex items-center gap-1.5"><i data-lucide="id-card" className="w-3.5 h-3.5"></i> patient ID</span>
+                    <span className="font-semibold text-slate-700">{patient.patientId}</span>
+                  </div>
+                  <div className="flex justify-between items-center py-0.5 border-b border-slate-100">
+                    <span className="text-slate-400 flex items-center gap-1.5"><i data-lucide="languages" className="w-3.5 h-3.5"></i> हिंदी नाम</span>
+                    <span className="font-medium text-slate-700">{patient.hindiName}</span>
+                  </div>
+                  <div className="flex justify-between items-center py-0.5 border-b border-slate-100">
+                    <span className="text-slate-400 flex items-center gap-1.5"><i data-lucide="globe" className="w-3.5 h-3.5"></i> اردو نام</span>
+                    <span className="font-medium text-slate-700">{patient.urduName}</span>
+                  </div>
+                  <div className="flex justify-between items-center py-0.5 border-b border-slate-100">
+                    <span className="text-slate-400 flex items-center gap-1.5"><i data-lucide="calendar" className="w-3.5 h-3.5"></i> Age / Gender</span>
+                    <span className="font-medium text-slate-700">{patient.ageGender}</span>
+                  </div>
+                  <div className="flex justify-between items-center py-0.5 border-b border-slate-100">
+                    <span className="text-slate-400 flex items-center gap-1.5"><i data-lucide="phone" className="w-3.5 h-3.5"></i> Mobile Number</span>
+                    <span className="font-medium text-slate-700">{patient.mobile}</span>
+                  </div>
+                  <div className="flex justify-between items-center py-0.5 border-b border-slate-100">
+                    <span className="text-slate-400 flex items-center gap-1.5"><i data-lucide="map-pin" className="w-3.5 h-3.5"></i> Address</span>
+                    <span className="font-medium text-slate-700">{patient.address}</span>
+                  </div>
+                  <div className="flex justify-between items-center py-0.5">
+                    <span className="text-slate-400 flex items-center gap-1.5"><i data-lucide="clock" className="w-3.5 h-3.5"></i> Registered On</span>
+                    <span className="font-medium text-slate-700">{patient.registeredOn}</span>
+                  </div>
+                </div>
+
+                {/* Right Action Buttons Grid */}
+                <div className="flex flex-col justify-between space-y-2">
+                  <div className="grid grid-cols-3 gap-2">
+                    <button className="border border-emerald-300 bg-emerald-50 text-emerald-600 p-2 rounded-lg text-xs font-medium flex items-center justify-center gap-1">
+                      <i data-lucide="phone" className="w-3.5 h-3.5"></i> Call
+                    </button>
+                    <button className="border border-sky-300 bg-sky-50 text-sky-600 p-2 rounded-lg text-xs font-medium flex items-center justify-center gap-1">
+                      <i data-lucide="message-square" className="w-3.5 h-3.5"></i> SMS
+                    </button>
+                    <button className="border border-emerald-400 bg-emerald-100 text-emerald-700 p-2 rounded-lg text-xs font-medium flex items-center justify-center gap-1">
+                      <i data-lucide="message-circle" className="w-3.5 h-3.5"></i> WhatsApp
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <button className="border border-cyan-brand text-cyan-brand bg-cyan-50 p-2.5 rounded-lg text-xs font-semibold flex items-center justify-center gap-1">
+                      <i data-lucide="edit" className="w-3.5 h-3.5"></i> Edit Patient
+                    </button>
+                    <button className="bg-cyan-header text-white p-2.5 rounded-lg text-xs font-semibold flex items-center justify-center gap-1 shadow-sm">
+                      <i data-lucide="plus-circle" className="w-3.5 h-3.5"></i> Add New Entry
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <button className="border border-slate-300 text-slate-700 p-2 rounded-lg text-xs font-medium flex items-center justify-center gap-1">
+                      <i data-lucide="file-text" className="w-3.5 h-3.5"></i> Documents
+                    </button>
+                    <button className="border border-red-300 bg-red-50 text-red-600 p-2 rounded-lg text-xs font-medium flex items-center justify-center gap-1">
+                      <i data-lucide="trash-2" className="w-3.5 h-3.5"></i> Delete Patient
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Fee Bar Cards */}
+              <div className="grid grid-cols-3 gap-3 text-white">
+                <div className="bg-gradient-to-r from-cyan-600 to-cyan-500 p-3 rounded-xl flex items-center justify-between shadow-sm">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wider opacity-80 font-medium">Total Fee</p>
+                    <p className="text-lg font-bold">{patient.totalFee}</p>
+                  </div>
+                  <i data-lucide="wallet" className="w-6 h-6 opacity-60"></i>
+                </div>
+
+                <div className="bg-gradient-to-r from-emerald-600 to-emerald-500 p-3 rounded-xl flex items-center justify-between shadow-sm">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wider opacity-80 font-medium">Paid Amount</p>
+                    <p className="text-lg font-bold">{patient.paidAmount}</p>
+                  </div>
+                  <i data-lucide="check-circle" className="w-6 h-6 opacity-60"></i>
+                </div>
+
+                <div className="bg-gradient-to-r from-cyan-500 to-sky-500 p-3 rounded-xl flex items-center justify-between shadow-sm">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wider opacity-80 font-medium">Remaining Amount</p>
+                    <p className="text-lg font-bold">{patient.remainingAmount}</p>
+                  </div>
+                  <i data-lucide="clock" className="w-6 h-6 opacity-60"></i>
+                </div>
+              </div>
+
+              {/* Dental Case Details & Dental Chart */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                {/* Case Details */}
+                <div className="bg-white p-3 rounded-xl border border-slate-200 text-xs space-y-1.5 shadow-sm">
+                  <h4 className="font-bold text-cyan-brand uppercase tracking-wider mb-2 flex items-center gap-1">
+                    <i data-lucide="file-spread-sheet" className="w-4 h-4"></i> Dental Case Details
+                  </h4>
+                  <div className="flex justify-between py-0.5"><span className="text-slate-400">Case ID</span><span className="font-semibold">{patient.caseId}</span></div>
+                  <div className="flex justify-between py-0.5"><span className="text-slate-400">Tooth Number</span><span>--</span></div>
+                  <div className="flex justify-between py-0.5"><span className="text-slate-400">Treatment</span><span>--</span></div>
+                  <div className="flex justify-between py-0.5"><span className="text-slate-400">Diagnosis Notes</span><span>--</span></div>
+                  <div className="flex justify-between py-0.5"><span className="text-slate-400">Payment Status</span><span className="bg-amber-100 text-amber-700 px-2 py-0.5 rounded text-[10px] font-bold">Pending</span></div>
+                  <div className="flex justify-between py-0.5"><span className="text-slate-400">Received Date</span><span>{patient.receivedDate}</span></div>
+                  <div className="flex justify-between py-0.5"><span className="text-slate-400">Last Visit</span><span>{patient.lastVisit}</span></div>
+                  <div className="flex justify-between py-0.5"><span className="text-slate-400">Medicines</span><span className="font-medium text-slate-700">{patient.medicines}</span></div>
+                  <div className="flex justify-between py-0.5"><span className="text-slate-400">Special Notes</span><span>--</span></div>
+                </div>
+
+                {/* Dental Chart Grid */}
+                <div className="bg-white p-3 rounded-xl border border-slate-200 text-xs shadow-sm flex flex-col justify-between">
+                  <div>
+                    <h4 className="font-bold text-cyan-brand uppercase tracking-wider mb-2 flex items-center gap-1">
+                      <i data-lucide="activity" className="w-4 h-4"></i> Dental Chart
+                    </h4>
+
+                    {/* Teeth Numbers Grid */}
+                    <div className="space-y-2 py-2">
+                      <div className="flex justify-between text-[10px] text-slate-500 font-medium">
+                        {upperTeeth.map(num => (
+                          <div key={num} className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center hover:bg-cyan-50 cursor-pointer">
+                            {num}
+                          </div>
+                        ))}
                       </div>
-                      <div className="text-right">
-                        <p className="font-bold text-emerald-500">₹{p.totalFee}</p>
-                        {Number(p.balance) > 0 && <p className="text-[10px] text-red-500">बाकी ₹{p.balance}</p>}
+                      <div className="flex justify-between text-[10px] text-slate-500 font-medium border-t pt-2">
+                        {lowerTeeth.map(num => (
+                          <div key={num} className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center hover:bg-cyan-50 cursor-pointer">
+                            {num}
+                          </div>
+                        ))}
                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
-            </main>
-          )}
-
-          {/* VIEW 2: NEW PATIENT FORM */}
-          {currentView === 'new-patient' && (
-            <main className="max-w-2xl mx-auto p-4">
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 space-y-3">
-                  <h2 className="text-xs font-bold text-purple-600 flex items-center gap-1.5 border-b pb-2">
-                    <i data-lucide="user" className="w-4 h-4"></i> 1. Patient Photo & Basic Details
-                  </h2>
-
-                  <div className="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-dashed border-slate-300">
-                    <div className="w-16 h-16 rounded-full bg-slate-200 border-2 border-pink-500 overflow-hidden flex items-center justify-center shrink-0">
-                      {formData.patientPhoto ? (
-                        <img src={formData.patientPhoto} alt="Patient" className="w-full h-full object-cover" />
-                      ) : (
-                        <i data-lucide="user" className="w-8 h-8 text-slate-400"></i>
-                      )}
-                    </div>
-                    <div>
-                      <label className="bg-pink-500 hover:bg-pink-600 text-white text-xs font-medium px-3 py-1.5 rounded-lg cursor-pointer inline-flex items-center gap-1">
-                        <i data-lucide="camera" className="w-3.5 h-3.5"></i> Take / Upload Photo
-                        <input type="file" accept="image/*" capture="environment" onChange={handleImageUpload} className="hidden" />
-                      </label>
-                    </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3 text-xs">
-                    <div>
-                      <label className="block font-semibold mb-1">Full Name *</label>
-                      <input type="text" required value={formData.fullName} onChange={e => setFormData({...formData, fullName: e.target.value})} placeholder="Patient Name" className="w-full p-2 border rounded-lg outline-none focus:ring-1 focus:ring-pink-500" />
-                    </div>
-                    <div>
-                      <label className="block font-semibold mb-1">Mobile No *</label>
-                      <input type="tel" required value={formData.mobile} onChange={e => setFormData({...formData, mobile: e.target.value})} placeholder="Phone Number" className="w-full p-2 border rounded-lg outline-none focus:ring-1 focus:ring-pink-500" />
-                    </div>
-                    <div>
-                      <label className="block font-semibold mb-1">Age *</label>
-                      <input type="number" required value={formData.age} onChange={e => setFormData({...formData, age: e.target.value})} placeholder="Age" className="w-full p-2 border rounded-lg outline-none focus:ring-1 focus:ring-pink-500" />
-                    </div>
-                    <div>
-                      <label className="block font-semibold mb-1">Gender</label>
-                      <select value={formData.gender} onChange={e => setFormData({...formData, gender: e.target.value})} className="w-full p-2 border rounded-lg bg-white">
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                      </select>
-                    </div>
+                  <div className="flex items-center justify-center gap-3 text-[10px] text-slate-500 border-t pt-2">
+                    <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full border border-slate-400"></span> Normal</span>
+                    <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500"></span> Work Done</span>
+                    <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500"></span> In Progress</span>
                   </div>
                 </div>
 
-                <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 space-y-3">
-                  <h2 className="text-xs font-bold text-red-600 flex items-center gap-1.5 border-b pb-2">
-                    <i data-lucide="activity" className="w-4 h-4"></i> 2. Medical History (Marj)
-                  </h2>
-                  <div className="grid grid-cols-2 gap-2 text-xs">
-                    {['Diabetes (Sugar)', 'High BP', 'Heart Problem', 'Drug Allergy'].map((d) => (
-                      <label key={d} className="flex items-center gap-2 p-1.5 border rounded-lg bg-slate-50 cursor-pointer">
-                        <input type="checkbox" checked={formData.medicalHistory.includes(d)} onChange={() => handleCheckboxChange(d)} />
-                        <span>{d}</span>
-                      </label>
-                    ))}
-                  </div>
+              </div>
+
+              {/* Recent Entries / History Table */}
+              <div className="bg-white rounded-xl border border-slate-200 p-3 shadow-sm">
+                <h4 className="font-bold text-cyan-brand text-xs uppercase tracking-wider mb-3 flex items-center gap-1">
+                  <i data-lucide="history" className="w-4 h-4"></i> Recent Entries / History
+                </h4>
+
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-[11px]">
+                    <thead className="bg-cyan-header text-white uppercase text-[9px] tracking-wider">
+                      <tr>
+                        <th className="p-2">Date</th>
+                        <th className="p-2">Case / Entry</th>
+                        <th className="p-2">Tooth</th>
+                        <th className="p-2">Treatment</th>
+                        <th className="p-2">Status</th>
+                        <th className="p-2">Fee</th>
+                        <th className="p-2">Paid</th>
+                        <th className="p-2">Remaining</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 text-center">
+                      <tr>
+                        <td colSpan="8" className="p-4 text-slate-400">-- No History Records --</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
 
-                <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 space-y-3">
-                  <h2 className="text-xs font-bold text-emerald-600 flex items-center gap-1.5 border-b pb-2">
-                    <i data-lucide="stethoscope" className="w-4 h-4"></i> 3. Treatment & Billing
-                  </h2>
-                  <div className="grid grid-cols-2 gap-3 text-xs">
-                    <div className="col-span-2">
-                      <label className="block font-semibold mb-1">Planned Treatment *</label>
-                      <select required value={formData.treatmentPlan} onChange={e => setFormData({...formData, treatmentPlan: e.target.value})} className="w-full p-2 border rounded-lg bg-white">
-                        <option value="">Select Treatment</option>
-                        <option value="RCT">Root Canal Treatment (RCT)</option>
-                        <option value="Extraction">Tooth Extraction</option>
-                        <option value="Scaling">Scaling / Cleaning</option>
-                        <option value="Crown">Dental Cap / Crown</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block font-semibold mb-1">Total Fee (₹)</label>
-                      <input type="number" value={formData.totalFee} onChange={e => setFormData({...formData, totalFee: e.target.value})} placeholder="2500" className="w-full p-2 border rounded-lg" />
-                    </div>
-                    <div>
-                      <label className="block font-semibold mb-1">Advance Paid (₹)</label>
-                      <input type="number" value={formData.advancePaid} onChange={e => setFormData({...formData, advancePaid: e.target.value})} placeholder="500" className="w-full p-2 border rounded-lg" />
-                    </div>
-                  </div>
+                <div className="mt-3 text-center">
+                  <button className="border border-cyan-brand text-cyan-brand text-xs px-3 py-1 rounded-lg font-medium hover:bg-cyan-50">
+                    View All Entries &gt;
+                  </button>
                 </div>
-
-                <button type="submit" className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 rounded-2xl shadow-md transition active:scale-95">
-                  Save & Register Patient
-                </button>
-              </form>
-            </main>
-          )}
-
-          {/* VIEW 3: PATIENT LIST */}
-          {currentView === 'patient-list' && (
-            <main className="max-w-4xl mx-auto p-4 space-y-4">
-              <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex justify-between items-center">
-                <h2 className="text-sm font-bold text-slate-800">All Registered Patients</h2>
-                <button onClick={() => setCurrentView('new-patient')} className="bg-pink-500 text-white text-xs px-3 py-1.5 rounded-lg">+ Add New</button>
               </div>
 
-              <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden text-xs">
-                {patients.map((p, idx) => (
-                  <div key={idx} className="p-3 border-b flex justify-between items-center hover:bg-slate-50">
-                    <div>
-                      <p className="font-bold text-slate-800">{p.name} <span className="text-[10px] text-slate-400">({p.id})</span></p>
-                      <p className="text-[10px] text-slate-500">{p.phone} • {p.treatment}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-bold text-slate-700">₹{p.totalFee}</p>
-                      <p className="text-[10px] text-emerald-600">Advance: ₹{p.advance}</p>
-                    </div>
-                  </div>
-                ))}
+              {/* Cyan Footer Tagline */}
+              <div className="bg-cyan-header text-white text-[10px] p-2 rounded-lg flex justify-between items-center px-4 font-medium">
+                <span>Patient Care, Your Priority</span>
+                <span>Kadir Bux Dental Lab</span>
+                <span>Caring for Healthy Smiles</span>
               </div>
-            </main>
-          )}
 
-          {/* PLACEHOLDER FOR OTHER BUTTONS */}
-          {['daily-folders', 'dental-chart', 'prescription', 'medicines', 'billing', 'reports', 'backup', 'settings'].includes(currentView) && (
-            <main className="max-w-2xl mx-auto p-8 text-center">
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-3">
-                <h2 className="text-base font-bold text-slate-800 capitalize">{currentView.replace('-', ' ')}</h2>
-                <p className="text-xs text-slate-400">Is feature ka screen UI yahan load hoga.</p>
-                <button onClick={() => setCurrentView('dashboard')} className="bg-pink-500 text-white text-xs px-4 py-2 rounded-xl">Back to Dashboard</button>
-              </div>
             </main>
-          )}
+          </div>
+
+          {/* Bottom Fixed Navigation Bar */}
+          <footer className="bg-white border-t px-4 py-2 flex justify-around text-slate-500 text-[10px] font-medium sticky bottom-0 z-10 shadow-lg">
+            <button className="flex flex-col items-center gap-0.5 hover:text-cyan-brand">
+              <i data-lucide="home" className="w-4 h-4"></i> Home
+            </button>
+            <button className="flex flex-col items-center gap-0.5 text-cyan-brand font-bold">
+              <i data-lucide="users" className="w-4 h-4"></i> Patients
+            </button>
+            <button className="flex flex-col items-center gap-0.5 hover:text-cyan-brand">
+              <i data-lucide="user-plus" className="w-4 h-4"></i> Add Patient
+            </button>
+            <button className="flex flex-col items-center gap-0.5 hover:text-cyan-brand">
+              <i data-lucide="bar-chart-2" className="w-4 h-4"></i> Reports
+            </button>
+            <button className="flex flex-col items-center gap-0.5 hover:text-cyan-brand">
+              <i data-lucide="settings" className="w-4 h-4"></i> Settings
+            </button>
+          </footer>
 
         </div>
       );
     }
 
     const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<MainApp />);
+    root.render(<PatientProfileView />);
   </script>
 </body>
 </html>
